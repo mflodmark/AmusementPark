@@ -116,3 +116,34 @@ extension Employee {
         }
     }
 }
+
+// Personal Information
+struct EmployeeInformation {
+    let firstName: String?
+    let lastName: String?
+    let streetAddress: String?
+    let city: String?
+    let state: String?
+    let zipCode: Int?
+    
+    func validateInformation() throws {
+        guard firstName != "" else {
+            throw InformationError.firstNameNotProvided
+        }
+        guard lastName != "" else {
+            throw InformationError.lastNameNotProvided
+        }
+        guard streetAddress != "" else  {
+            throw InformationError.streetAddressNotProvided
+        }
+        guard city != "" else {
+            throw InformationError.cityNotProvided
+        }
+        guard state != "" else {
+            throw InformationError.stateNotProvided
+        }
+        guard zipCode != nil else {
+            throw InformationError.cityNotProvided
+        }
+    }
+}
