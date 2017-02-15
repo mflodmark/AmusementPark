@@ -52,6 +52,7 @@ extension Guest {
 }
 
 
+
 // Discounts
 extension GuestType {
     var foodDiscount: Percent {
@@ -74,31 +75,31 @@ extension GuestType {
     // Guests only have access to amusement area
     var amusementAccess: Bool {
         switch self {
-        default: return true
+        case .classic, .freeChild , .vip: return true
         }
     }
     
     var kitchenAccess: Bool {
         switch self {
-        default: return false
+        case .classic, .freeChild , .vip: return false
         }
     }
     
     var rideControlAccess: Bool {
         switch self {
-        default: return false
+        case .classic, .freeChild , .vip: return false
         }
     }
     
     var maintenanceAccess: Bool {
         switch self {
-        default: return false
+        case .classic, .freeChild , .vip: return false
         }
     }
     
     var officeAccess: Bool {
         switch self {
-        default: return false
+        case .classic, .freeChild , .vip: return false
         }
     }
 }
@@ -107,17 +108,18 @@ extension GuestType {
 extension GuestType {
     var accessAllRides: Bool {
         switch self {
-        default: return true
+        case .classic, .freeChild , .vip: return true
         }
     }
     
     var skipAllRideLines: Bool {
         switch self {
         case .vip: return true
-        default: return false
+        case .classic, .freeChild: return false
         }
     }
 }
+
 
 // Personal Information
 struct GuestInformation {
