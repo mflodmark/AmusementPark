@@ -11,11 +11,33 @@ import Foundation
 // Validate pass and check if the person in question has the right access
 // Check entrant Type before using a method
 
-// Area Access
-func swipeAreaAccessGuest(type: GuestType, areaTryingToAccess: AreaAccess) {
-    let areaAccess: AreaAccess
+let viewController = ViewController()
+
+// Area Access Guest
+func swipeAreaAccessGuest(type: GuestType, areaTryingToAccess: AreaAccess) -> Bool {
+    //let areaAccess: AreaAccess
     var area: Bool {
-        switch areaAccess {
+        switch areaTryingToAccess {
+        case .amusementAreas: return type.amusementAccess
+        case .kitchenAreas: return type.kitchenAccess
+        case .maintenanceAreas: return type.maintenanceAccess
+        case .rideControlAreas: return type.rideControlAccess
+        }
+    }
+    
+    // Check if false and return access denied with alert message
+    if area == false {
+        viewController.alertAreaAccess()
+        return area
+    } else {
+        return area
+    }
+}
+
+// Area Access Employee
+func swipeAreaAccessEmployee(type: EmployeeType, areaTryingToAccess: AreaAccess) -> Bool{
+    var area: Bool {
+        switch areaTryingToAccess {
         case .amusementAreas: return type.amusementAccess
         case .kitchenAreas: return type.kitchenAccess
         case .maintenanceAreas: return type.maintenanceAccess
@@ -23,18 +45,11 @@ func swipeAreaAccessGuest(type: GuestType, areaTryingToAccess: AreaAccess) {
         }
     }
     // Check if false and return access denied with alert message
-}
-
-
-func swipeAreaAccessEmployee(type: EmployeeType) {
-    let areaAccess: AreaAccess
-    var area: Bool {
-        switch areaAccess {
-        case .amusementAreas: return type.amusementAccess
-        case .kitchenAreas: return type.kitchenAccess
-        case .maintenanceAreas: return type.maintenanceAccess
-        case .rideControlAreas: return type.rideControlAccess
-        }
+    if area == false {
+        viewController.alertAreaAccess()
+        return area
+    } else {
+        return area
     }
 }
 

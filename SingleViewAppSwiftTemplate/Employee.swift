@@ -50,52 +50,52 @@ enum EmployeeType {
 
 
 // Discounts
-extension Employee {
+extension EmployeeType {
     var foodDiscount: Percent {
-        switch employeeType {
+        switch self {
         case .hourlyEmployeeFoodServices, .hourlyEmployeeMaintenance, .hourlyEmployeeRideServices: return 15
         case .manager: return 25
         }
     }
     
     var merchandiseDiscount: Percent {
-        switch employeeType {
+        switch self {
         case .manager, .hourlyEmployeeFoodServices, .hourlyEmployeeMaintenance, .hourlyEmployeeRideServices: return 25
         }
     }
 }
 
 // Area Access
-extension Employee {
+extension EmployeeType {
     var amusementAccess: Bool {
-        switch employeeType {
+        switch self {
         default: return true
         }
     }
     
     var kitchenAccess: Bool {
-        switch employeeType {
+        switch self {
         case .hourlyEmployeeMaintenance, .manager ,.hourlyEmployeeFoodServices: return true
         default: return false
         }
     }
     
     var rideControlAccess: Bool {
-        switch employeeType {
+        switch self {
         case .hourlyEmployeeMaintenance, .manager ,.hourlyEmployeeRideServices: return true
         default: return false
         }
     }
     
     var maintenanceAccess: Bool {
-        switch employeeType {
+        switch self {
         case .hourlyEmployeeMaintenance, .manager: return true
         default: return false
         }
     }
     
     var officeAccess: Bool {
-        switch employeeType {
+        switch self {
         case .manager: return true
         default: return false
         }
@@ -103,15 +103,15 @@ extension Employee {
 }
 
 // Ride Access 
-extension Employee {
+extension EmployeeType {
     var accessAllRides: Bool {
-        switch employeeType {
+        switch self {
         default: return true
         }
     }
     
     var skipAllRideLines: Bool {
-        switch employeeType {
+        switch self {
         default: return false
         }
     }
