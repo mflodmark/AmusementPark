@@ -53,16 +53,16 @@ extension Guest {
 
 
 // Discounts
-extension Guest {
+extension GuestType {
     var foodDiscount: Percent {
-        switch guestType {
+        switch self {
         case .classic, .freeChild: return 0
         case .vip: return 10
         }
     }
     
     var merchandiseDiscount: Percent {
-        switch guestType {
+        switch self {
         case .classic, .freeChild: return 0
         case .vip: return 20
         }
@@ -70,49 +70,49 @@ extension Guest {
 }
 
 // Area Access
-extension Guest {
+extension GuestType {
     // Guests only have access to amusement area
     var amusementAccess: Bool {
-        switch guestType {
+        switch self {
         default: return true
         }
     }
     
     var kitchenAccess: Bool {
-        switch guestType {
+        switch self {
         default: return false
         }
     }
     
     var rideControlAccess: Bool {
-        switch guestType {
+        switch self {
         default: return false
         }
     }
     
     var maintenanceAccess: Bool {
-        switch guestType {
+        switch self {
         default: return false
         }
     }
     
     var officeAccess: Bool {
-        switch guestType {
+        switch self {
         default: return false
         }
     }
 }
 
 // Ride Access
-extension Guest {
+extension GuestType {
     var accessAllRides: Bool {
-        switch guestType {
+        switch self {
         default: return true
         }
     }
     
     var skipAllRideLines: Bool {
-        switch guestType {
+        switch self {
         case .vip: return true
         default: return false
         }

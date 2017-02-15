@@ -9,27 +9,50 @@
 import Foundation
 
 // Validate pass and check if the person in question has the right access
-func swipeAreaAccess(entrantType: EntrantType, guestType: GuestType, guestInfo: GuestInformation, employeeType: EmployeeType, employeeInfo: EmployeeInformation) {
-    if entrantType == EntrantType.guest {
-        swipeAreaAccessGuest(type: guestType, info: guestInfo)
-    } else if entrantType == EntrantType.employee {
-        swipeAreaAccesEmployee(type: employeeType)
+// Check entrant Type before using a method
+
+// Area Access
+func swipeAreaAccessGuest(type: GuestType, areaTryingToAccess: AreaAccess) {
+    let areaAccess: AreaAccess
+    var area: Bool {
+        switch areaAccess {
+        case .amusementAreas: return type.amusementAccess
+        case .kitchenAreas: return type.kitchenAccess
+        case .maintenanceAreas: return type.maintenanceAccess
+        case .rideControlAreas: return type.rideControlAccess
+        }
+    }
+    // Check if false and return access denied with alert message
+}
+
+
+func swipeAreaAccessEmployee(type: EmployeeType) {
+    let areaAccess: AreaAccess
+    var area: Bool {
+        switch areaAccess {
+        case .amusementAreas: return type.amusementAccess
+        case .kitchenAreas: return type.kitchenAccess
+        case .maintenanceAreas: return type.maintenanceAccess
+        case .rideControlAreas: return type.rideControlAccess
+        }
+    }
+}
+
+// Ride Access
+func swipeRideAccessGuest(type: GuestType) {
+    let rideAccess: RideAccess
+    var ride: Bool {
+        switch rideAccess {
+        case .accessAllRides: return type.accessAllRides
+        case .skipAllRideLines: return type.skipAllRideLines
+        }
     }
 }
 
 
-func swipeAreaAccessGuest(type: GuestType, info: GuestInformation) {
-    let guest = Guest(guestType: type, guestInformation: info)
-}
-
-func swipeAreaAccesEmployee(type: EmployeeType) {
-    
-}
-
-func swipeRideAccess() {
-    
-}
-
+// Discount Access
 func swipeDiscountAccess() {
     
 }
+
+// Delay of swipe method
