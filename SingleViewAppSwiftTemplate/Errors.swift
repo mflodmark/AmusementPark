@@ -18,6 +18,8 @@ enum InformationError: Error {
     case zipCodeNotProvided
 }
 
+
+// Not in use yet
 enum ValidateAreaAccessError: Error {
     case amusementParkNotAllowed
     case kitchenNotAllowed

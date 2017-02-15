@@ -27,6 +27,11 @@ enum RideAccess {
     case skipAllRideLines
 }
 
+enum Discount {
+    case food
+    case merchandise
+}
+
 
 
 

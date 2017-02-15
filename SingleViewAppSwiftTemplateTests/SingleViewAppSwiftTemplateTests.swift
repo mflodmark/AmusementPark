@@ -45,7 +45,7 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
         
     }
     
-    // Guest test access to amusment area
+    // Guest test access to amusement area
     func testGuestClassicAreaAccessToAmusementArea() {
         let swipe = Swipe()
         let access = swipe.swipeAreaAccessGuest(type: guestClassic, areaTryingToAccess: .amusementAreas)
@@ -77,11 +77,64 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
         XCTAssertTrue(access == false)
     }
     
+    // Demonstrate error
     func testGuestFreeChildAreaAccessToKitchenArea() {
         let swipe = Swipe()
         let access = swipe.swipeAreaAccessGuest(type: guestFreeChild, areaTryingToAccess: .kitchenAreas)
+        XCTAssertTrue(access == true)
+    }
+    
+    // Employee test access to maintenance area
+    func testEmployeeManagerAreaAccessToMaintenanceArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeManager, areaTryingToAccess: .maintenanceAreas)
+        XCTAssertTrue(access == true)
+    }
+    
+    func testEmployeeHourlyEmployeeMaintenanceAccessToMaintenanceArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeMaintenance, areaTryingToAccess: .maintenanceAreas)
+        XCTAssertTrue(access == true)
+    }
+    
+    func testEmployeeHourlyEmployeeFoodServicesAreaAccessToMaintenanceArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeFoodServices, areaTryingToAccess: .maintenanceAreas)
         XCTAssertTrue(access == false)
     }
+    
+    func testEmployeeHourlyEmployeeRideServicesAreaAccessToMaintenanceArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .maintenanceAreas)
+        XCTAssertTrue(access == false)
+    }
+    
+    // Employee test access to ride control area
+    func testEmployeeManagerAreaAccessToRideControlArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeManager, areaTryingToAccess: .rideControlAreas)
+        XCTAssertTrue(access == true)
+    }
+    
+    func testEmployeeHourlyEmployeeMaintenanceAccessToRideControlArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeMaintenance, areaTryingToAccess: .rideControlAreas)
+        XCTAssertTrue(access == true)
+    }
+    
+    func testEmployeeHourlyEmployeeFoodServicesAreaAccessToRideControlArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeFoodServices, areaTryingToAccess: .rideControlAreas)
+        XCTAssertTrue(access == false)
+    }
+    
+    func testEmployeeHourlyEmployeeRideServicesAreaAccessToRideControlArea() {
+        let swipe = Swipe()
+        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .rideControlAreas)
+        XCTAssertTrue(access == true)
+    }
+
+    
     
     func testExample() {
         // This is an example of a functional test case.

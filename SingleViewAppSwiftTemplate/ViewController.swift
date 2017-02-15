@@ -26,6 +26,18 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func alertRideAccess() {
+        let alert = UIAlertController(title: "Ride access", message: "Not allowed", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func alertRideAccessSkipAllLines() {
+        let alert = UIAlertController(title: "Skip all lines", message: "Not allowed", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 
