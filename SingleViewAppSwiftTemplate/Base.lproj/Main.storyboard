@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pG3-Hz-1B1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,15 +29,20 @@
                                 <state key="normal" title="Guest">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a4J-JY-ZVM"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kz6-bn-ucs">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kz6-bn-ucs">
                                 <rect key="frame" x="283" y="20" width="92" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.51958187460000005" green="0.42313059079999998" blue="0.56456071139999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Vendor">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sOL-gk-O1A"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBK-OV-Gwj">
                                 <rect key="frame" x="192" y="20" width="92" height="58"/>
@@ -47,6 +52,9 @@
                                 <state key="normal" title="Manager">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2jy-F1-flk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVW-PK-Atf">
                                 <rect key="frame" x="100" y="20" width="92" height="58"/>
@@ -56,6 +64,9 @@
                                 <state key="normal" title="Employee">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PKH-3f-DqP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJT-ro-b9d">
                                 <rect key="frame" x="0.0" y="77" width="108" height="58"/>
@@ -65,6 +76,9 @@
                                 <state key="normal" title="Child">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantSubType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zIK-Hr-fsY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lj4-F3-3RM">
                                 <rect key="frame" x="192" y="77" width="83" height="58"/>
@@ -74,15 +88,20 @@
                                 <state key="normal" title="Senior">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantSubType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V9r-O1-GOz"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTd-h7-gec">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTd-h7-gec">
                                 <rect key="frame" x="275" y="77" width="100" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.33032606889452693" green="0.26978088595076188" blue="0.36353755150152289" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="VIP">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantSubType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qnQ-lK-QAg"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aKM-jf-HUl">
                                 <rect key="frame" x="16" y="167" width="97" height="30"/>
@@ -225,6 +244,10 @@
                                 <state key="normal" title="Generate Pass">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="generatePass:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RUB-mP-eT0"/>
+                                    <segue destination="pG3-Hz-1B1" kind="show" id="n8P-Dp-Stv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTI-2K-zO7">
                                 <rect key="frame" x="192" y="595" width="166" height="36"/>
@@ -232,6 +255,9 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Populate Data"/>
+                                <connections>
+                                    <action selector="populateData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="93c-1G-fzb"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUA-MI-4Kd">
                                 <rect key="frame" x="16" y="333" width="97" height="21"/>
@@ -248,10 +274,36 @@
                                 <state key="normal" title="Adult">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkEntrantSubType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dzu-Wp-ehZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Kz6-bn-ucs" firstAttribute="leading" secondItem="lTd-h7-gec" secondAttribute="trailing" constant="-92" id="GKA-4s-Ubb"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="city" destination="hv5-BN-rcw" id="5cq-Jj-sHU"/>
+                        <outlet property="company" destination="kkB-YD-yze" id="XXY-at-hGn"/>
+                        <outlet property="dateOfBirth" destination="aKM-jf-HUl" id="4By-AH-4xZ"/>
+                        <outlet property="employeeButton" destination="sVW-PK-Atf" id="EWT-Lc-TJ8"/>
+                        <outlet property="firstButton" destination="fJT-ro-b9d" id="cO2-bp-izU"/>
+                        <outlet property="firstName" destination="Mr6-JR-SNv" id="gQD-Ks-bEo"/>
+                        <outlet property="fourthButton" destination="lTd-h7-gec" id="S4d-xH-zVy"/>
+                        <outlet property="geustButton" destination="yw8-71-bBm" id="FVX-hw-BEZ"/>
+                        <outlet property="lastName" destination="ySc-CZ-nSc" id="9Kc-5k-qOT"/>
+                        <outlet property="managerButton" destination="mBK-OV-Gwj" id="FJT-Qw-Ksq"/>
+                        <outlet property="projectNr" destination="xql-h8-vXK" id="nMc-XS-Wq2"/>
+                        <outlet property="secondButton" destination="l1W-Dg-MYt" id="7uK-9t-aCu"/>
+                        <outlet property="ssn" destination="i4w-PO-SlD" id="Um3-Gi-swX"/>
+                        <outlet property="state" destination="ERi-4F-VWf" id="TAV-cX-MnG"/>
+                        <outlet property="streetAddress" destination="r9f-3l-kgc" id="oOT-0i-YOd"/>
+                        <outlet property="thirdButton" destination="lj4-F3-3RM" id="0Cl-7N-466"/>
+                        <outlet property="vendorButton" destination="Kz6-bn-ucs" id="ih7-Lm-m2r"/>
+                        <outlet property="zipCode" destination="pbA-kR-UcD" id="NRC-7k-Uuv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,7 +329,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Create New Pass"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="sUh-jq-GRS"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="I0O-L1-SK0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLy-wB-eVj">
@@ -289,7 +341,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="qhZ-ll-ib7"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="LMb-l3-1pB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDP-FB-eSi">
@@ -352,10 +404,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1P-bW-bXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002" y="125"/>
+            <point key="canvasLocation" x="2767" y="125"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sUh-jq-GRS"/>
+        <segue reference="LMb-l3-1pB"/>
     </inferredMetricsTieBreakers>
 </document>
