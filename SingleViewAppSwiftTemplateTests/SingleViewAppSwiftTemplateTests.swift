@@ -81,7 +81,7 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
     func testGuestFreeChildAreaAccessToKitchenArea() {
         let swipe = Swipe()
         let access = swipe.swipeAreaAccessGuest(type: guestFreeChild, areaTryingToAccess: .kitchenAreas)
-        XCTAssertTrue(access == true)
+        XCTAssertTrue(access == false)
     }
     
     // Employee test access to maintenance area
