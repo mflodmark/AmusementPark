@@ -16,6 +16,8 @@ enum InformationError: Error {
     case cityNotProvided
     case stateNotProvided
     case zipCodeNotProvided
+    case dateOfVisitNotProvided
+    case vendorCompanyNotProvided
 }
 
 
@@ -31,3 +33,4 @@ enum validateRideAccess: Error {
     case accessAllRidesNotAllowed
     case skipAllLinesNotAllowed
 }
+

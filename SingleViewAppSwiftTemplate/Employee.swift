@@ -7,13 +7,14 @@
 //
 
 import Foundation
-
+/*
 class Employee {
-    let entrantType = EntrantType.employee
+    let entrantType: EntrantType
     let employeeType: EmployeeType
-    let employeeInformation: EmployeeInformation
+    let employeeInformation: PersonalInformation
     
-    init(employeeType: EmployeeType, employeeInformation: EmployeeInformation) {
+    init(entrantType: EntrantType, employeeType: EmployeeType, employeeInformation: PersonalInformation) {
+        self.entrantType = entrantType
         self.employeeType = employeeType
         self.employeeInformation = employeeInformation
         
@@ -32,6 +33,12 @@ class Employee {
             print("Missing street address, please add street address and try again")
         } catch InformationError.zipCodeNotProvided {
             print("Missing zip code, please add zip code and try again")
+        }  catch InformationError.dateOfBirthNotProvided {
+            print("Missing date of birth, please add date of birth and try again")
+        } catch InformationError.dateOfVisitNotProvided {
+            print("Missing date of visit, please add date of visit and try again")
+        } catch InformationError.vendorCompanyNotProvided {
+            print("Missing vendor company, please add vendor company and try again")
         } catch {
             fatalError("Fatal error!")
         }
@@ -39,20 +46,21 @@ class Employee {
     
 }
 
-enum EmployeeType {
-    case manager
-    case hourlyEmployeeFoodServices
-    case hourlyEmployeeRideServices
-    case hourlyEmployeeMaintenance
+enum EmployeeType: String {
+    case manager = "Manager"
+    case hourlyEmployeeFoodServices = "Hourly Food"
+    case hourlyEmployeeRideServices = "Hourly Ride"
+    case hourlyEmployeeMaintenance = "Hourly Maintenance"
+    case contractEmployee = "Contract"
+    case vendor = "Vendor"
 }
-
-// Checking valid personal employee information
 
 
 // Discounts
 extension EmployeeType {
     var foodDiscount: Percent {
         switch self {
+        case .vendor, .contractEmployee: return 0
         case .hourlyEmployeeFoodServices, .hourlyEmployeeMaintenance, .hourlyEmployeeRideServices: return 15
         case .manager: return 25
         }
@@ -60,6 +68,7 @@ extension EmployeeType {
     
     var merchandiseDiscount: Percent {
         switch self {
+        case .vendor, .contractEmployee: return 0
         case .manager, .hourlyEmployeeFoodServices, .hourlyEmployeeMaintenance, .hourlyEmployeeRideServices: return 25
         }
     }
@@ -75,7 +84,7 @@ extension EmployeeType {
     
     var kitchenAccess: Bool {
         switch self {
-        case .hourlyEmployeeMaintenance, .manager ,.hourlyEmployeeFoodServices: return true
+        case .hourlyEmployeeMaintenance, .manager ,.hourlyEmployeeFoodServices, .vendor, .contractEmployee: return true
         default: return false
         }
     }
@@ -116,34 +125,5 @@ extension EmployeeType {
         }
     }
 }
+*/
 
-// Personal Information
-struct EmployeeInformation {
-    let firstName: String?
-    let lastName: String?
-    let streetAddress: String?
-    let city: String?
-    let state: String?
-    let zipCode: Int?
-    
-    func validateInformation() throws {
-        guard firstName != "" else {
-            throw InformationError.firstNameNotProvided
-        }
-        guard lastName != "" else {
-            throw InformationError.lastNameNotProvided
-        }
-        guard streetAddress != "" else  {
-            throw InformationError.streetAddressNotProvided
-        }
-        guard city != "" else {
-            throw InformationError.cityNotProvided
-        }
-        guard state != "" else {
-            throw InformationError.stateNotProvided
-        }
-        guard zipCode != nil else {
-            throw InformationError.cityNotProvided
-        }
-    }
-}

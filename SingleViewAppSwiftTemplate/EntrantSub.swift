@@ -1,30 +1,30 @@
 //
-//  Guest.swift
+//  EntrantSub.swift
 //  SingleViewAppSwiftTemplate
 //
-//  Created by Markus Flodmark on 2017-02-11.
+//  Created by Markus Flodmark on 2017-02-20.
 //  Copyright © 2017 Treehouse. All rights reserved.
 //
 
 import Foundation
 
-/*
 //MARK: Typealiases
 typealias Percent = Int
 typealias Age = Int
 
-class Guest {
-    let entrantType = EntrantType.guest
-    var guestType: GuestType
-    let guestInformation: PersonalInformation
+class EntrantSub {
+    let entrantType: EntrantType
+    var entrantSubType: EntrantSubType
+    let personalInformation: PersonalInformation
     
-    init(guestType: GuestType, guestInformation: PersonalInformation) {
-        self.guestType = guestType
-        self.guestInformation = guestInformation
+    init(entrantType: EntrantType, entrantSubType: EntrantSubType, personalInformation: PersonalInformation) {
+        self.entrantType = entrantType
+        self.entrantSubType = entrantSubType
+        self.personalInformation = personalInformation
         
-        // Catch errors
+        // catch errors
         do {
-            try guestInformation.validateInformation()
+            try personalInformation.validateInformation()
         } catch InformationError.firstNameNotProvided {
             print("Missing first name, please add first name and try again")
         } catch InformationError.lastNameNotProvided {
@@ -47,51 +47,47 @@ class Guest {
             fatalError("Fatal error!")
         }
     }
+    
 }
 
-enum GuestType: String {
-    case classic = "Classic"
-    case vip = "VIP"
-    case freeChild = "Child"
-    case senior = "Senior"
-    case seasonPass = "Season Pass"
+enum EntrantSubType: String {
+    case manager = "Manager"
+    case hourlyEmployeeFoodServices = "Hourly Food"
+    case hourlyEmployeeRideServices = "Hourly Ride"
+    case hourlyEmployeeMaintenance = "Hourly Maintenance"
+    case contractEmployee = "Contract"
+    case vendor = "Vendor"
+    case guestClassic = "Classic"
+    case guestVip = "VIP"
+    case guestFreeChild = "Child"
+    case guestSenior = "Senior"
+    case guestSeasonPass = "Season Pass"
 }
-
-// Check age for guest type free child
-extension Guest {
-    func checkAge(bornAt: Date) {
-        let age = Date().timeIntervalSince(bornAt)
-        let ageLimit = 5.00
-        let ageLimitInDays = ageLimit * 365
-        
-        if age <= ageLimitInDays {
-            guestType = .freeChild
-        }
-    }
-}
-
 
 
 // Discounts
-extension GuestType {
+extension EntrantSubType {
     var foodDiscount: Percent {
         switch self {
-        case .classic, .freeChild: return 0
-        case .vip, .senior , .seasonPass: return 10
+        case .vendor, .contractEmployee, .guestClassic, .guestFreeChild: return 0
+        case .guestVip, .guestSenior, .guestSeasonPass: return 10
+        case .hourlyEmployeeFoodServices, .hourlyEmployeeMaintenance, .hourlyEmployeeRideServices: return 15
+        case .manager: return 25
         }
     }
     
     var merchandiseDiscount: Percent {
         switch self {
-        case .classic, .freeChild: return 0
-        case .vip, .senior, .seasonPass: return 20
+        case .vendor, .contractEmployee, .guestClassic, .guestFreeChild: return 0
+        case .guestVip, .guestSenior, .guestSeasonPass: return 20
+        case .manager, .hourlyEmployeeFoodServices, .hourlyEmployeeMaintenance, .hourlyEmployeeRideServices: return 25
         }
     }
 }
 
+
 // Area Access
-extension GuestType {
-    // Guests only have access to amusement area
+extension EntrantSubType {
     var amusementAccess: Bool {
         switch self {
         default: return true
@@ -100,48 +96,62 @@ extension GuestType {
     
     var kitchenAccess: Bool {
         switch self {
+        case .hourlyEmployeeMaintenance, .manager ,.hourlyEmployeeFoodServices, .vendor, .contractEmployee: return true
         default: return false
         }
     }
     
     var rideControlAccess: Bool {
         switch self {
+        case .hourlyEmployeeMaintenance, .manager ,.hourlyEmployeeRideServices: return true
         default: return false
         }
     }
     
     var maintenanceAccess: Bool {
         switch self {
+        case .hourlyEmployeeMaintenance, .manager: return true
         default: return false
         }
     }
     
     var officeAccess: Bool {
         switch self {
+        case .manager: return true
         default: return false
         }
     }
 }
 
+
+
 // Ride Access
-extension GuestType {
+extension EntrantSubType {
     var accessAllRides: Bool {
         switch self {
-        default: return true        }
+        default: return true
+        }
     }
     
     var skipAllRideLines: Bool {
         switch self {
-        case .vip: return true
+        case .guestVip: return true
         default: return false
         }
     }
 }
 
-*/
-
-
-
-
+// Check age for guest type free child
+extension EntrantSub {
+    func checkAge(bornAt: Date) {
+        let age = Date().timeIntervalSince(bornAt)
+        let ageLimit = 5.00
+        let ageLimitInDays = ageLimit * 365
+        
+        if age <= ageLimitInDays {
+            entrantSubType = .guestFreeChild
+        }
+    }
+}
 
 

@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // Declarations
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +42,102 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    // MARK: Functions
+    
+    // Generate Guest Pass
+    func generateGuestPass() {
+        
+    }
+    
+    // Generate Employee pass
+    func generateEmployeePass() {
+        
+    }
+    
+    // Buttons Enabled = False
+    func buttonsIsEnabledFalse () {
+        // Unable buttons
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton]
+        
+        for button in subButtonsArray {
+            button?.isUserInteractionEnabled = false
+        }
+    }
+    
+    // Buttons Enabled = True
+    func buttonsIsEnabledTrue () {
+        // Enable buttons
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton]
+        
+        for button in subButtonsArray {
+            button?.isUserInteractionEnabled = true
+        }
+    }
+    
+    // Get text for Sub Type Buttons
+    func getTextEntrantSubTypeButtons(type: EntrantType) {
+        if type == .guest {
+            firstButton.setTitle(EntrantSubType.guestFreeChild.rawValue, for: .normal)
+            secondButton.setTitle(EntrantSubType.guestClassic.rawValue, for: .normal)
+            thirdButton.setTitle(EntrantSubType.guestSenior.rawValue, for: .normal)
+            fourthButton.setTitle(EntrantSubType.guestSenior.rawValue, for: .normal)
+            buttonsIsEnabledTrue()
+            
+            // Change opacity of other buttons
+            guestButton.alpha = 1.0
+            employeeButton.alpha = 0.5
+            vendorButton.alpha = 0.5
+            managerButton.alpha = 0.5
+            
+        } else if type == .employee {
+            firstButton.setTitle(EntrantSubType.contractEmployee.rawValue, for: .normal)
+            secondButton.setTitle(EntrantSubType.hourlyEmployeeMaintenance.rawValue, for: .normal)
+            thirdButton.setTitle(EntrantSubType.hourlyEmployeeMaintenance.rawValue, for: .normal)
+            fourthButton.setTitle(EntrantSubType.hourlyEmployeeRideServices.rawValue, for: .normal)
+            buttonsIsEnabledTrue()
+            
+            // Change opacity of other buttons
+            guestButton.alpha = 0.5
+            employeeButton.alpha = 1.0
+            vendorButton.alpha = 0.5
+            managerButton.alpha = 0.5
+            
+        } else if type == .manager {
+            firstButton.setTitle("", for: .normal)
+            secondButton.setTitle("", for: .normal)
+            thirdButton.setTitle("", for: .normal)
+            fourthButton.setTitle("", for: .normal)
+            buttonsIsEnabledFalse()
+            
+            // Change opacity of other buttons
+            guestButton.alpha = 0.5
+            employeeButton.alpha = 0.5
+            vendorButton.alpha = 0.5
+            managerButton.alpha = 1.0
+            
+
+        } else if type == .vendor {
+            firstButton.setTitle("", for: .normal)
+            secondButton.setTitle("", for: .normal)
+            thirdButton.setTitle("", for: .normal)
+            fourthButton.setTitle("", for: .normal)
+            buttonsIsEnabledFalse()
+            
+            // Change opacity of other buttons
+            guestButton.alpha = 0.5
+            employeeButton.alpha = 0.5
+            vendorButton.alpha = 1.0
+            managerButton.alpha = 0.5
+        }
+    }
+    
+    
     // MARK: Buttons
     
-    //Main row
+    // Main row
     @IBOutlet weak var employeeButton: UIButton!
     @IBOutlet weak var managerButton: UIButton!
-    @IBOutlet weak var geustButton: UIButton!
+    @IBOutlet weak var guestButton: UIButton!
     @IBOutlet weak var vendorButton: UIButton!
     
     // Second Row
@@ -54,22 +146,42 @@ class ViewController: UIViewController {
     @IBOutlet weak var thirdButton: UIButton!
     @IBOutlet weak var fourthButton: UIButton!
     
+
     // Check Entrant Type
     @IBAction func checkEntrantType(_ sender: UIButton) {
+        let entrant = sender.title(for: .normal)
+        
+        if entrant! == guestButton.title(for: .normal) {
+            getTextEntrantSubTypeButtons(type: EntrantType.guest)
+            
+        } else if entrant! == managerButton.title(for: .normal) {
+            getTextEntrantSubTypeButtons(type: EntrantType.manager)
+            
+        } else if entrant! == vendorButton.title(for: .normal) {
+            getTextEntrantSubTypeButtons(type: EntrantType.vendor)
+            
+        } else if entrant! == employeeButton.title(for: .normal) {
+            getTextEntrantSubTypeButtons(type: EntrantType.employee)
+        }
+        
     }
-
+    
     
     // Check Entrant Sub Type
     @IBAction func checkEntrantSubType(_ sender: UIButton) {
+        if sender == firstButton {
+            
+        } else if sender == secondButton {
+        } else if sender == thirdButton {
+        } else if sender == fourthButton {
+        }
     }
     
     // Generate Pass
-    
     @IBAction func generatePass(_ sender: Any) {
     }
     
     // Populate Date
-    
     @IBAction func populateData(_ sender: Any) {
         dateOfBirth.text = "1988-11-19"
         ssn.text = "1234512345"
@@ -96,6 +208,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var zipCode: UITextField!
+ 
+    
+    // MARK: Layout
     
 }
 

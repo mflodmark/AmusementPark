@@ -292,7 +292,7 @@
                         <outlet property="firstButton" destination="fJT-ro-b9d" id="cO2-bp-izU"/>
                         <outlet property="firstName" destination="Mr6-JR-SNv" id="gQD-Ks-bEo"/>
                         <outlet property="fourthButton" destination="lTd-h7-gec" id="S4d-xH-zVy"/>
-                        <outlet property="geustButton" destination="yw8-71-bBm" id="FVX-hw-BEZ"/>
+                        <outlet property="guestButton" destination="yw8-71-bBm" id="Ojq-yL-Uw0"/>
                         <outlet property="lastName" destination="ySc-CZ-nSc" id="9Kc-5k-qOT"/>
                         <outlet property="managerButton" destination="mBK-OV-Gwj" id="FJT-Qw-Ksq"/>
                         <outlet property="projectNr" destination="xql-h8-vXK" id="nMc-XS-Wq2"/>

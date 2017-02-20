@@ -11,25 +11,25 @@ import XCTest
 
 class SingleViewAppSwiftTemplateTests: XCTestCase {
     
-    var guestClassic: GuestType!
-    var guestVip: GuestType!
-    var guestFreeChild: GuestType!
-    var employeeManager: EmployeeType!
-    var employeeHourlyEmployeeMaintenance: EmployeeType!
-    var employeeHourlyEmployeeRideServices: EmployeeType!
-    var employeeHourlyEmployeeFoodServices: EmployeeType!
+    var guestClassic: EntrantSubType!
+    var guestVip: EntrantSubType!
+    var guestFreeChild: EntrantSubType!
+    var employeeManager: EntrantSubType!
+    var employeeHourlyEmployeeMaintenance: EntrantSubType!
+    var employeeHourlyEmployeeRideServices: EntrantSubType!
+    var employeeHourlyEmployeeFoodServices: EntrantSubType!
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        guestClassic = GuestType.classic
-        guestVip = GuestType.vip
-        guestFreeChild = GuestType.freeChild
-        employeeManager = EmployeeType.manager
-        employeeHourlyEmployeeMaintenance = EmployeeType.hourlyEmployeeMaintenance
-        employeeHourlyEmployeeRideServices = EmployeeType.hourlyEmployeeRideServices
-        employeeHourlyEmployeeFoodServices = EmployeeType.hourlyEmployeeFoodServices
+        guestClassic = EntrantSubType.guestClassic
+        guestVip = EntrantSubType.guestVip
+        guestFreeChild = EntrantSubType.guestFreeChild
+        employeeManager = EntrantSubType.manager
+        employeeHourlyEmployeeMaintenance = EntrantSubType.hourlyEmployeeMaintenance
+        employeeHourlyEmployeeRideServices = EntrantSubType.hourlyEmployeeRideServices
+        employeeHourlyEmployeeFoodServices = EntrantSubType.hourlyEmployeeFoodServices
     }
     
     override func tearDown() {
@@ -48,89 +48,88 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
     // Guest test access to amusement area
     func testGuestClassicAreaAccessToAmusementArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessGuest(type: guestClassic, areaTryingToAccess: .amusementAreas)
+        let access = swipe.swipeAreaAccess(type: guestClassic, areaTryingToAccess: .amusementAreas)
         XCTAssertTrue(access == true)
     }
     
     func testGuestVipAreaAccessToAmusementArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessGuest(type: guestVip, areaTryingToAccess: .amusementAreas)
+        let access = swipe.swipeAreaAccess(type: guestVip, areaTryingToAccess: .amusementAreas)
         XCTAssertTrue(access == true)
     }
     
     func testGuestFreeChildAreaAccessToAmusementArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessGuest(type: guestFreeChild, areaTryingToAccess: .amusementAreas)
+        let access = swipe.swipeAreaAccess(type: guestFreeChild, areaTryingToAccess: .amusementAreas)
         XCTAssertTrue(access == true)
     }
     
     // Guest test access to kitchen area
     func testGuestClassicAreaAccessToKitchenArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessGuest(type: guestClassic, areaTryingToAccess: .kitchenAreas)
+        let access = swipe.swipeAreaAccess(type: guestClassic, areaTryingToAccess: .kitchenAreas)
         XCTAssertTrue(access == false)
     }
     
     func testGuestVipAreaAccessToKitchenArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessGuest(type: guestVip, areaTryingToAccess: .kitchenAreas)
+        let access = swipe.swipeAreaAccess(type: guestVip, areaTryingToAccess: .kitchenAreas)
         XCTAssertTrue(access == false)
     }
     
-    // Demonstrate error
     func testGuestFreeChildAreaAccessToKitchenArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessGuest(type: guestFreeChild, areaTryingToAccess: .kitchenAreas)
+        let access = swipe.swipeAreaAccess(type: guestFreeChild, areaTryingToAccess: .kitchenAreas)
         XCTAssertTrue(access == false)
     }
     
     // Employee test access to maintenance area
     func testEmployeeManagerAreaAccessToMaintenanceArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeManager, areaTryingToAccess: .maintenanceAreas)
+        let access = swipe.swipeAreaAccess(type: employeeManager, areaTryingToAccess: .maintenanceAreas)
         XCTAssertTrue(access == true)
     }
     
     func testEmployeeHourlyEmployeeMaintenanceAccessToMaintenanceArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeMaintenance, areaTryingToAccess: .maintenanceAreas)
+        let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeMaintenance, areaTryingToAccess: .maintenanceAreas)
         XCTAssertTrue(access == true)
     }
     
     func testEmployeeHourlyEmployeeFoodServicesAreaAccessToMaintenanceArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeFoodServices, areaTryingToAccess: .maintenanceAreas)
+        let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeFoodServices, areaTryingToAccess: .maintenanceAreas)
         XCTAssertTrue(access == false)
     }
     
     func testEmployeeHourlyEmployeeRideServicesAreaAccessToMaintenanceArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .maintenanceAreas)
+        let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .maintenanceAreas)
         XCTAssertTrue(access == false)
     }
     
     // Employee test access to ride control area
     func testEmployeeManagerAreaAccessToRideControlArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeManager, areaTryingToAccess: .rideControlAreas)
+        let access = swipe.swipeAreaAccess(type: employeeManager, areaTryingToAccess: .rideControlAreas)
         XCTAssertTrue(access == true)
     }
     
     func testEmployeeHourlyEmployeeMaintenanceAccessToRideControlArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeMaintenance, areaTryingToAccess: .rideControlAreas)
+        let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeMaintenance, areaTryingToAccess: .rideControlAreas)
         XCTAssertTrue(access == true)
     }
     
     func testEmployeeHourlyEmployeeFoodServicesAreaAccessToRideControlArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeFoodServices, areaTryingToAccess: .rideControlAreas)
+        let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeFoodServices, areaTryingToAccess: .rideControlAreas)
         XCTAssertTrue(access == false)
     }
     
     func testEmployeeHourlyEmployeeRideServicesAreaAccessToRideControlArea() {
         let swipe = Swipe()
-        let access = swipe.swipeAreaAccessEmployee(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .rideControlAreas)
+        let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .rideControlAreas)
         XCTAssertTrue(access == true)
     }
 

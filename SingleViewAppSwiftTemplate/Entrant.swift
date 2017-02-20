@@ -9,9 +9,11 @@
 import Foundation
 
 
-enum EntrantType {
+enum EntrantType: String {
     case employee
     case guest
+    case manager
+    case vendor
 }
 
 
