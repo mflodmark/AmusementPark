@@ -131,6 +131,50 @@ class ViewController: UIViewController {
         }
     }
     
+    func showCorrectFields(type: EntrantSubType) {
+        let textFieldArray = [dateOfBirth, ssn, projectNr, firstName, lastName, company, streetAddress, city, state, zipCode]
+
+        // white background for date of birth
+        if type == .guestClassic || type == .guestFreeChild || type == .guestVip {
+            for textField in textFieldArray {
+                switch self {
+                case dateOfBirth: return (textField?.backgroundColor = UIColor.white)!
+                default: return (textField?.backgroundColor = UIColor.lightGray)!
+                }
+            }
+        }
+        
+        // white background for first name, last name, street address, city, state, zip code
+        if type == .hourlyEmployeeMaintenance || type == .hourlyEmployeeFoodServices || type == .hourlyEmployeeRideServices || type == .manager || type == .contractEmployee || type == .guestSeasonPass {
+            for textField in textFieldArray {
+                switch self {
+                case firstName, lastName, streetAddress, city, state, zipCode: return (textField?.backgroundColor = UIColor.white)!
+                default: return (textField?.backgroundColor = UIColor.lightGray)!
+                }
+            }
+        }
+
+        // white background for first & last name, company & date of birth
+        if type == .vendor {
+            for textField in textFieldArray {
+                switch self {
+                case firstName, lastName, company, dateOfBirth: return (textField?.backgroundColor = UIColor.white)!
+                default: return (textField?.backgroundColor = UIColor.lightGray)!
+                }
+            }
+        }
+        
+        // white background for first & last name & date of birth
+        if type == .guestSenior {
+            for textField in textFieldArray {
+                switch self {
+                case firstName, lastName, dateOfBirth: return (textField?.backgroundColor = UIColor.white)!
+                default: return (textField?.backgroundColor = UIColor.lightGray)!
+                }
+            }
+        }
+        
+    }
     
     // MARK: Buttons
     
@@ -149,18 +193,16 @@ class ViewController: UIViewController {
 
     // Check Entrant Type
     @IBAction func checkEntrantType(_ sender: UIButton) {
-        let entrant = sender.title(for: .normal)
-        
-        if entrant! == guestButton.title(for: .normal) {
+        if sender == guestButton {
             getTextEntrantSubTypeButtons(type: EntrantType.guest)
             
-        } else if entrant! == managerButton.title(for: .normal) {
+        } else if sender == managerButton {
             getTextEntrantSubTypeButtons(type: EntrantType.manager)
             
-        } else if entrant! == vendorButton.title(for: .normal) {
+        } else if sender == vendorButton {
             getTextEntrantSubTypeButtons(type: EntrantType.vendor)
             
-        } else if entrant! == employeeButton.title(for: .normal) {
+        } else if sender == employeeButton {
             getTextEntrantSubTypeButtons(type: EntrantType.employee)
         }
         
@@ -169,12 +211,10 @@ class ViewController: UIViewController {
     
     // Check Entrant Sub Type
     @IBAction func checkEntrantSubType(_ sender: UIButton) {
-        if sender == firstButton {
-            
-        } else if sender == secondButton {
-        } else if sender == thirdButton {
-        } else if sender == fourthButton {
+        if sender.title(for: .normal) == EntrantSubType.guestClassic.rawValue {
+            showCorrectFields(type: .guestClassic)
         }
+        
     }
     
     // Generate Pass
@@ -208,7 +248,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var zipCode: UITextField!
- 
+    
     
     // MARK: Layout
     
