@@ -10,10 +10,10 @@ import Foundation
 
 
 enum EntrantType: String {
-    case employee
-    case guest
-    case manager
-    case vendor
+    case employee = "Employee"
+    case guest = "Guest"
+    case manager = "Manager"
+    case vendor = "Vendor"
 }
 
 

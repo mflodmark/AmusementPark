@@ -15,7 +15,7 @@ struct PersonalInformation {
     let streetAddress: String?
     let city: String?
     let state: String?
-    let zipCode: Int?
+    let zipCode: String?
     let vendorCompany: String?
     let dateOfBirth: Date?
     let dateOfVisit: Date?
@@ -48,6 +48,7 @@ struct PersonalInformation {
         guard dateOfVisit != nil else {
             throw InformationError.dateOfVisitNotProvided
         }
-        
     }
 }
+
+

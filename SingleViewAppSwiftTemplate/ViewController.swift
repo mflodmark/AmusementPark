@@ -11,7 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     
     // Declarations
+    var counter = 0
+    var entrant: EntrantSub? = nil
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -43,16 +46,6 @@ class ViewController: UIViewController {
     }
     
     // MARK: Functions
-    
-    // Generate Guest Pass
-    func generateGuestPass() {
-        
-    }
-    
-    // Generate Employee pass
-    func generateEmployeePass() {
-        
-    }
     
     // Buttons Enabled = False
     func buttonsIsEnabledFalse () {
@@ -131,6 +124,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // Show or hide fields when sub entrant type is pressed
     func showCorrectFields(type: EntrantSubType) {
         let textFieldArray = [dateOfBirth, ssn, projectNr, firstName, lastName, company, streetAddress, city, state, zipCode]
 
@@ -173,7 +167,18 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // set default settings
+    func setDefaultSettings() {
+        let textFieldArray = [dateOfBirth, ssn, projectNr, firstName, lastName, company, streetAddress, city, state, zipCode]
         
+        for textField in textFieldArray {
+            textField?.backgroundColor = UIColor.lightGray
+            textField?.isUserInteractionEnabled = false
+            textField?.text = ""
+        }
+        projectNr.text = "\(counter)"
     }
     
     // MARK: Buttons
@@ -190,6 +195,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var thirdButton: UIButton!
     @IBOutlet weak var fourthButton: UIButton!
     
+    @IBOutlet weak var fifthButton: UIButton!
 
     // Check Entrant Type
     @IBAction func checkEntrantType(_ sender: UIButton) {
@@ -211,21 +217,29 @@ class ViewController: UIViewController {
     
     // Check Entrant Sub Type
     @IBAction func checkEntrantSubType(_ sender: UIButton) {
-        if sender.title(for: .normal) == EntrantSubType.guestClassic.rawValue {
-            showCorrectFields(type: .guestClassic)
-        }
+        let entrantSubTypeArray = [EntrantSubType.guestClassic, EntrantSubType.guestVip, EntrantSubType.guestFreeChild, EntrantSubType.guestSenior]
         
+        for subType in entrantSubTypeArray {
+            if sender.title(for: .normal) == subType.rawValue {
+                showCorrectFields(type: subType)
+            }
+        }
     }
     
     // Generate Pass
     @IBAction func generatePass(_ sender: Any) {
+
+        // fixa dynamisk, måste lagra typerna lokalt? Hur skicka mot nästa viewController
+        entrant = EntrantSub(entrantType: EntrantType.employee, entrantSubType: EntrantSubType.contractEmployee, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: nil, dateOfVisit: nil))
     }
+    
+    
     
     // Populate Date
     @IBAction func populateData(_ sender: Any) {
         dateOfBirth.text = "1988-11-19"
         ssn.text = "1234512345"
-        projectNr.text = "1"
+        //projectNr.text
         firstName.text = "Markus"
         lastName.text = "Flodmark"
         company.text = "Apple"
@@ -251,7 +265,7 @@ class ViewController: UIViewController {
     
     
     // MARK: Layout
-    
+
 }
 
 
