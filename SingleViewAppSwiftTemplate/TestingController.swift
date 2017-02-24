@@ -23,13 +23,16 @@ class TestingController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Lägg till så att alla outlets får data direkt vid load
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+        fullName.text = getFullName()
+        pass.text = getEntrantType()
+        
     }
     
     // MARK: Declarations
@@ -69,15 +72,44 @@ class TestingController: UIViewController {
     }
     
     @IBAction func testRideAccess(_ sender: Any) {
+        let entrantSubType = viewController.entrant?.entrantSubType
+        
+        let accessAllRides = swipe.swipeRideAccess(type: entrantSubType!, rideAccess: .accessAllRides)
+        let skipAllLines = swipe.swipeRideAccess(type: entrantSubType!, rideAccess: .skipAllRideLines)
+
+        
+        // Add text to label test result
+        testResult.text = "You have access to: all rides: \(accessAllRides) skip all ride lines: \(skipAllLines)"
     }
     
     @IBAction func testDiscountAccess(_ sender: Any) {
+        let entrantSubType = viewController.entrant?.entrantSubType
+        
+        let food = swipe.swipeDiscountAccess(type: entrantSubType!, discount: .food)
+        let merchandise = swipe.swipeDiscountAccess(type: entrantSubType!, discount: .merchandise)
+        
+        // Add text to label test result
+        testResult.text = "You have the following discount: \nFood: \(food) \nMerchandise: \(merchandise)"
+        
     }
+    
+
+    @IBAction func createNewPass(_ sender: UIButton) {
+        
+        // Update project nr
+        viewController.counter += 1
+    }
+    
+    
+    
     
     // MARK: Labels
 
     @IBOutlet weak var testResult: UILabel!
     
+    @IBOutlet weak var fullName: UILabel!
+    
+    @IBOutlet weak var pass: UILabel!
     
     
 }

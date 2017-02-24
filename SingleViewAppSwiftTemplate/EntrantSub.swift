@@ -61,7 +61,7 @@ enum EntrantSubType: String {
     case guestVip = "VIP"
     case guestFreeChild = "Child"
     case guestSenior = "Senior"
-    case guestSeasonPass = "Season Pass"
+    case guestSeasonPass = "Season"
 }
 
 
@@ -141,17 +141,6 @@ extension EntrantSubType {
     }
 }
 
-// Check age for guest type free child
-extension EntrantSub {
-    func checkAge(bornAt: Date) {
-        let age = Date().timeIntervalSince(bornAt)
-        let ageLimit = 5.00
-        let ageLimitInDays = ageLimit * 365
-        
-        if age <= ageLimitInDays {
-            entrantSubType = .guestFreeChild
-        }
-    }
-}
+
 
 

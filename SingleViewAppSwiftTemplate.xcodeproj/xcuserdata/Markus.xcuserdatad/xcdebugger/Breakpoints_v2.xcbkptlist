@@ -56,12 +56,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SingleViewAppSwiftTemplate/ViewController.swift"
-            timestampString = "509611229.024564"
+            timestampString = "509666072.447048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "showCorrectFields(type:)"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "checkEntrantType(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

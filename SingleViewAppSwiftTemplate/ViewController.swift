@@ -11,16 +11,20 @@ import UIKit
 class ViewController: UIViewController {
     
     // Declarations
-    var counter = 0
+    var counter = 1
     var entrant: EntrantSub? = nil
-
+    var entrantT: EntrantType? = nil
+    var entrantS: EntrantSubType? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // default for text fields
+        setDefaultSettings()
         
-        
+        // default for name on sub type
+        subButtonsIsBlank()
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,6 +63,17 @@ class ViewController: UIViewController {
         }
     }
     
+    // Sub buttons no name
+    func subButtonsIsBlank () {
+        // Unable buttons
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton, fifthButton]
+        
+        for button in subButtonsArray {
+            button?.setTitle("", for: .normal)
+        }
+    }
+
+    
     // Buttons Enabled = True
     func buttonsIsEnabledTrue () {
         // Enable buttons
@@ -90,7 +105,7 @@ class ViewController: UIViewController {
             firstButton.setTitle(EntrantSubType.guestFreeChild.rawValue, for: .normal)
             secondButton.setTitle(EntrantSubType.guestClassic.rawValue, for: .normal)
             thirdButton.setTitle(EntrantSubType.guestSenior.rawValue, for: .normal)
-            fourthButton.setTitle(EntrantSubType.guestSenior.rawValue, for: .normal)
+            fourthButton.setTitle(EntrantSubType.guestVip.rawValue, for: .normal)
             fifthButton.setTitle(EntrantSubType.guestSeasonPass.rawValue, for: .normal)
             buttonsIsEnabledTrue()
             
@@ -121,7 +136,7 @@ class ViewController: UIViewController {
             thirdButton.isHidden = true
             fourthButton.isHidden = true
             fifthButton.isHidden = true
-            buttonsIsEnabledFalse()
+            //buttonsIsEnabledFalse()
             
             // Change opacity of other buttons
             guestButton.alpha = 0.5
@@ -136,7 +151,7 @@ class ViewController: UIViewController {
             thirdButton.isHidden = true
             fourthButton.isHidden = true
             fifthButton.isHidden = true
-            buttonsIsEnabledFalse()
+            //buttonsIsEnabledFalse()
             
             // Change opacity of other buttons
             guestButton.alpha = 0.5
@@ -149,7 +164,6 @@ class ViewController: UIViewController {
     
     // Show or hide fields when sub entrant type is pressed
     func showCorrectFields(type: EntrantSubType) {
-
         
         setDefaultSettings()
 
@@ -183,50 +197,7 @@ class ViewController: UIViewController {
             }
         }
         
-        /*
-                let textFieldArray = [dateOfBirth, ssn, projectNr, firstName, lastName, company, streetAddress, city, state, zipCode]
-        // white background for date of birth
-        if type == .guestClassic || type == .guestFreeChild || type == .guestVip {
-            for textField in textFieldArray {
-                switch self {
-                case dateOfBirth: return (textField?.backgroundColor = UIColor.white)!
-                default: return (textField?.backgroundColor = UIColor.lightGray)!
-                }
-            }
-            
-
-        }
-        
-        // white background for first name, last name, street address, city, state, zip code
-        if type == .hourlyEmployeeMaintenance || type == .hourlyEmployeeFoodServices || type == .hourlyEmployeeRideServices || type == .manager || type == .contractEmployee || type == .guestSeasonPass {
-            for textField in textFieldArray {
-                switch self {
-                case firstName, lastName, streetAddress, city, state, zipCode: return (textField?.backgroundColor = UIColor.white)!
-                default: return (textField?.backgroundColor = UIColor.lightGray)!
-                }
-            }
-        }
-
-        // white background for first & last name, company & date of birth
-        if type == .vendor {
-            for textField in textFieldArray {
-                switch self {
-                case firstName, lastName, company, dateOfBirth: return (textField?.backgroundColor = UIColor.white)!
-                default: return (textField?.backgroundColor = UIColor.lightGray)!
-                }
-            }
-        }
-        
-        // white background for first & last name & date of birth
-        if type == .guestSenior {
-            for textField in textFieldArray {
-                switch self {
-                case firstName, lastName, dateOfBirth: return (textField?.backgroundColor = UIColor.white)!
-                default: return (textField?.backgroundColor = UIColor.lightGray)!
-                }
-            }
-        }
- */
+ 
     }
     
     // set default settings
@@ -253,6 +224,24 @@ class ViewController: UIViewController {
         }
     }
     
+    // Check age for guest type free child
+    func checkAge(bornAt: Date) {
+        let age = Date().timeIntervalSince(bornAt)
+        let ageLimit = 5.00
+        let ageLimitInDays = ageLimit * 365
+        
+        if age <= ageLimitInDays {
+            entrantS = EntrantSubType.guestFreeChild
+            subButtonPressed(type: firstButton)
+        } else {
+            entrantS = EntrantSubType.guestClassic
+            subButtonPressed(type: secondButton)
+        }
+        
+        showCorrectFields(type: entrantS!)
+
+    }
+    
     
     // MARK: Buttons
     
@@ -269,8 +258,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var fourthButton: UIButton!
     @IBOutlet weak var fifthButton: UIButton!
 
+    // Lazi init
+    lazy var setDefaultButtonSetUp: UIButton = {
+        let button = UIButton(type: .system)
+        return button
+    }()
+
     // Check Entrant Type
     @IBAction func checkEntrantType(_ sender: UIButton) {
+        
+        // set sub buttons to default state
+        subButtonPressed(type: setDefaultButtonSetUp)
+        
+        // set default for text fields
+        setDefaultSettings()
+        
         if sender == guestButton {
             getTextEntrantSubTypeButtons(type: EntrantType.guest)
             
@@ -292,7 +294,14 @@ class ViewController: UIViewController {
         let entrantSubTypeArray = [EntrantSubType.guestClassic, EntrantSubType.guestVip, EntrantSubType.guestFreeChild, EntrantSubType.guestSenior, EntrantSubType.guestSeasonPass, .hourlyEmployeeMaintenance, .hourlyEmployeeFoodServices, .hourlyEmployeeRideServices, .vendor, .manager,.contractEmployee]
         
         subButtonPressed(type: sender)
-        
+        if sender.title(for: .normal) == EntrantSubType.guestFreeChild.rawValue {
+            // check for age with date that have been added
+            
+            let date
+            
+            checkAge(bornAt: date)
+            
+        }
         for subType in entrantSubTypeArray {
             if sender.title(for: .normal) == subType.rawValue {
                 showCorrectFields(type: subType)
@@ -303,23 +312,50 @@ class ViewController: UIViewController {
     // Generate Pass
     @IBAction func generatePass(_ sender: Any) {
 
-        entrant = EntrantSub(entrantType: EntrantType.employee, entrantSubType: EntrantSubType.contractEmployee, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: nil, dateOfVisit: nil))
+        // måste fixas
+        entrant = EntrantSub(entrantType: EntrantType.guest, entrantSubType: EntrantSubType.guestVip, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: nil, dateOfVisit: nil))
     }
     
     
     
     // Populate Date
     @IBAction func populateData(_ sender: Any) {
-        dateOfBirth.text = "1988-11-19"
-        ssn.text = "1234512345"
-        //projectNr.text
-        firstName.text = "Markus"
-        lastName.text = "Flodmark"
-        company.text = "Apple"
-        streetAddress.text = "1 Infinite Loop"
-        city.text = "Cupertino"
-        state.text = "California"
-        zipCode.text = "95014"
+        // check if user interaction = false then populate 
+        if dateOfBirth.isUserInteractionEnabled == true {
+            dateOfBirth.text = "1988-11-19"
+            
+        }
+        if ssn.isUserInteractionEnabled == true {
+            ssn.text = "1234512345"
+        }
+        if firstName.isUserInteractionEnabled == true {
+            firstName.text = "Markus"
+
+        }
+        if lastName.isUserInteractionEnabled == true {
+            lastName.text = "Flodmark"
+
+        }
+        if company.isUserInteractionEnabled == true {
+            company.text = "Apple"
+
+        }
+        if streetAddress.isUserInteractionEnabled == true {
+            streetAddress.text = "1 Infinite Loop"
+
+        }
+        if city.isUserInteractionEnabled == true {
+            city.text = "Cupertino"
+
+        }
+        if state.isUserInteractionEnabled == true {
+            state.text = "California"
+
+        }
+        if zipCode.isUserInteractionEnabled == true {
+            zipCode.text = "95014"
+
+        }
     }
     
     
@@ -340,5 +376,7 @@ class ViewController: UIViewController {
     // MARK: Layout
 
 }
+
+
 
 
