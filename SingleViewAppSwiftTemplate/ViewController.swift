@@ -19,6 +19,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +52,7 @@ class ViewController: UIViewController {
     // Buttons Enabled = False
     func buttonsIsEnabledFalse () {
         // Unable buttons
-        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton]
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton, fifthButton]
         
         for button in subButtonsArray {
             button?.isUserInteractionEnabled = false
@@ -60,20 +62,36 @@ class ViewController: UIViewController {
     // Buttons Enabled = True
     func buttonsIsEnabledTrue () {
         // Enable buttons
-        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton]
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton, fifthButton]
         
         for button in subButtonsArray {
             button?.isUserInteractionEnabled = true
         }
     }
     
+    // Buttons hidden = false
+    func buttonsIsHiddenFalse () {
+        // Enable buttons
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton, fifthButton]
+        
+        for button in subButtonsArray {
+            button?.isHidden = false
+        }
+    }
+    
+    
+    
     // Get text for Sub Type Buttons
     func getTextEntrantSubTypeButtons(type: EntrantType) {
+        
+        buttonsIsHiddenFalse()
+        
         if type == .guest {
             firstButton.setTitle(EntrantSubType.guestFreeChild.rawValue, for: .normal)
             secondButton.setTitle(EntrantSubType.guestClassic.rawValue, for: .normal)
             thirdButton.setTitle(EntrantSubType.guestSenior.rawValue, for: .normal)
             fourthButton.setTitle(EntrantSubType.guestSenior.rawValue, for: .normal)
+            fifthButton.setTitle(EntrantSubType.guestSeasonPass.rawValue, for: .normal)
             buttonsIsEnabledTrue()
             
             // Change opacity of other buttons
@@ -87,6 +105,8 @@ class ViewController: UIViewController {
             secondButton.setTitle(EntrantSubType.hourlyEmployeeMaintenance.rawValue, for: .normal)
             thirdButton.setTitle(EntrantSubType.hourlyEmployeeMaintenance.rawValue, for: .normal)
             fourthButton.setTitle(EntrantSubType.hourlyEmployeeRideServices.rawValue, for: .normal)
+            //fifthButton.setTitle("", for: .normal)
+            fifthButton.isHidden = true
             buttonsIsEnabledTrue()
             
             // Change opacity of other buttons
@@ -96,10 +116,11 @@ class ViewController: UIViewController {
             managerButton.alpha = 0.5
             
         } else if type == .manager {
-            firstButton.setTitle("", for: .normal)
-            secondButton.setTitle("", for: .normal)
-            thirdButton.setTitle("", for: .normal)
-            fourthButton.setTitle("", for: .normal)
+            firstButton.setTitle("Manager", for: .normal)
+            secondButton.isHidden = true
+            thirdButton.isHidden = true
+            fourthButton.isHidden = true
+            fifthButton.isHidden = true
             buttonsIsEnabledFalse()
             
             // Change opacity of other buttons
@@ -110,10 +131,11 @@ class ViewController: UIViewController {
             
 
         } else if type == .vendor {
-            firstButton.setTitle("", for: .normal)
-            secondButton.setTitle("", for: .normal)
-            thirdButton.setTitle("", for: .normal)
-            fourthButton.setTitle("", for: .normal)
+            firstButton.setTitle("Vendor", for: .normal)
+            secondButton.isHidden = true
+            thirdButton.isHidden = true
+            fourthButton.isHidden = true
+            fifthButton.isHidden = true
             buttonsIsEnabledFalse()
             
             // Change opacity of other buttons
@@ -123,11 +145,46 @@ class ViewController: UIViewController {
             managerButton.alpha = 0.5
         }
     }
+
     
     // Show or hide fields when sub entrant type is pressed
     func showCorrectFields(type: EntrantSubType) {
-        let textFieldArray = [dateOfBirth, ssn, projectNr, firstName, lastName, company, streetAddress, city, state, zipCode]
 
+        
+        setDefaultSettings()
+
+        if type == .guestClassic || type == .guestFreeChild || type == .guestVip {
+            
+            dateOfBirth.backgroundColor = UIColor.white
+            dateOfBirth.isUserInteractionEnabled = true
+            
+        } else if type == .hourlyEmployeeMaintenance || type == .hourlyEmployeeFoodServices || type == .hourlyEmployeeRideServices || type == .manager || type == .contractEmployee || type == .guestSeasonPass {
+            
+            let firstArray = [firstName, lastName, streetAddress, city, state, zipCode]
+            for field in firstArray {
+                field?.backgroundColor = UIColor.white
+                field?.isUserInteractionEnabled = true
+            }
+            
+        } else if type == .vendor {
+            
+            let secondArray = [firstName, lastName, company, dateOfBirth]
+            for field in secondArray {
+                field?.backgroundColor = UIColor.white
+                field?.isUserInteractionEnabled = true
+            }
+            
+        } else if type == .guestSenior {
+            
+            let thirdArray = [firstName, lastName, dateOfBirth]
+            for field in thirdArray {
+                field?.backgroundColor = UIColor.white
+                field?.isUserInteractionEnabled = true
+            }
+        }
+        
+        /*
+                let textFieldArray = [dateOfBirth, ssn, projectNr, firstName, lastName, company, streetAddress, city, state, zipCode]
         // white background for date of birth
         if type == .guestClassic || type == .guestFreeChild || type == .guestVip {
             for textField in textFieldArray {
@@ -136,6 +193,8 @@ class ViewController: UIViewController {
                 default: return (textField?.backgroundColor = UIColor.lightGray)!
                 }
             }
+            
+
         }
         
         // white background for first name, last name, street address, city, state, zip code
@@ -167,6 +226,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+ */
     }
     
     // set default settings
@@ -176,10 +236,23 @@ class ViewController: UIViewController {
         for textField in textFieldArray {
             textField?.backgroundColor = UIColor.lightGray
             textField?.isUserInteractionEnabled = false
-            textField?.text = ""
         }
         projectNr.text = "\(counter)"
     }
+    
+    // Change opacity when sub button is pressed
+    func subButtonPressed(type: UIButton) {
+        let subButtonsArray = [firstButton, secondButton, thirdButton, fourthButton, fifthButton]
+        
+        for button in subButtonsArray {
+            if type == button {
+                button?.alpha = 1.0
+            } else {
+                button?.alpha = 0.5
+            }
+        }
+    }
+    
     
     // MARK: Buttons
     
@@ -194,7 +267,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var secondButton: UIButton!
     @IBOutlet weak var thirdButton: UIButton!
     @IBOutlet weak var fourthButton: UIButton!
-    
     @IBOutlet weak var fifthButton: UIButton!
 
     // Check Entrant Type
@@ -217,7 +289,9 @@ class ViewController: UIViewController {
     
     // Check Entrant Sub Type
     @IBAction func checkEntrantSubType(_ sender: UIButton) {
-        let entrantSubTypeArray = [EntrantSubType.guestClassic, EntrantSubType.guestVip, EntrantSubType.guestFreeChild, EntrantSubType.guestSenior]
+        let entrantSubTypeArray = [EntrantSubType.guestClassic, EntrantSubType.guestVip, EntrantSubType.guestFreeChild, EntrantSubType.guestSenior, EntrantSubType.guestSeasonPass, .hourlyEmployeeMaintenance, .hourlyEmployeeFoodServices, .hourlyEmployeeRideServices, .vendor, .manager,.contractEmployee]
+        
+        subButtonPressed(type: sender)
         
         for subType in entrantSubTypeArray {
             if sender.title(for: .normal) == subType.rawValue {
@@ -229,7 +303,6 @@ class ViewController: UIViewController {
     // Generate Pass
     @IBAction func generatePass(_ sender: Any) {
 
-        // fixa dynamisk, måste lagra typerna lokalt? Hur skicka mot nästa viewController
         entrant = EntrantSub(entrantType: EntrantType.employee, entrantSubType: EntrantSubType.contractEmployee, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: nil, dateOfVisit: nil))
     }
     
