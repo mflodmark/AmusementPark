@@ -8,13 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     // Declarations
     var counter = 1
     var entrant: EntrantSub? = nil
     var entrantT: EntrantType? = nil
     var entrantS: EntrantSubType? = nil
+    // Create a DatePicker
+    let datePicker: UIDatePicker = UIDatePicker()
+    let dateButton = UIButton()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,7 @@ class ViewController: UIViewController {
         
         // default for name on sub type
         subButtonsIsBlank()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +57,51 @@ class ViewController: UIViewController {
     }
     
     // MARK: Functions
+    
+    func showDatePicker() {
+        
+        // Datepicker
+        datePicker.frame = CGRect(x: 10, y: 50, width: self.view.frame.width, height: 200)
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.backgroundColor = UIColor.white
+        datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        datePicker.datePickerMode = UIDatePickerMode.date
+        self.view.addSubview(datePicker)
+        
+        // Add Button
+        dateButton.frame = CGRect(x: 10, y: 250, width: self.view.frame.width, height: 40)
+        if entrantS == EntrantSubType.guestFreeChild {
+            dateButton.setTitle("Add birth date and then press here", for: .normal)
+        } else {
+            dateButton.setTitle("Add visit date and then press here", for: .normal)
+        }
+        dateButton.backgroundColor = UIColor.black
+        dateButton.addTarget(self, action: #selector(ViewController.doneButton(_:)), for: .touchUpInside)
+        self.view.addSubview(dateButton)
+    }
+    
+    func datePickerValueChanged(_ sender: UIDatePicker){
+        
+        // Create date formatter
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        // Set date format
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        datePicker.datePickerMode = UIDatePickerMode.date
+        
+        // Apply date
+        if entrantS == EntrantSubType.guestFreeChild {
+            dateOfBirth.text = dateFormatter.string(from: sender.date)
+        } else {
+        }
+        
+    }
+    
+    func doneButton(_ sender: UIButton) {
+        // Resign
+        datePicker.resignFirstResponder()
+        dateButton.resignFirstResponder()
+    }
     
     // Buttons Enabled = False
     func buttonsIsEnabledFalse () {
@@ -294,16 +344,17 @@ class ViewController: UIViewController {
         let entrantSubTypeArray = [EntrantSubType.guestClassic, EntrantSubType.guestVip, EntrantSubType.guestFreeChild, EntrantSubType.guestSenior, EntrantSubType.guestSeasonPass, .hourlyEmployeeMaintenance, .hourlyEmployeeFoodServices, .hourlyEmployeeRideServices, .vendor, .manager,.contractEmployee]
         
         subButtonPressed(type: sender)
-        if sender.title(for: .normal) == EntrantSubType.guestFreeChild.rawValue {
-            // check for age with date that have been added
-            
-            let date
-            
-            checkAge(bornAt: date)
-            
-        }
+
         for subType in entrantSubTypeArray {
-            if sender.title(for: .normal) == subType.rawValue {
+            if sender.title(for: .normal) == EntrantSubType.guestFreeChild.rawValue {
+                // check for age with date that have been added
+                
+                showDatePicker()
+                //let date
+                
+                //checkAge(bornAt: date)
+                
+            } else if sender.title(for: .normal) == subType.rawValue {
                 showCorrectFields(type: subType)
             }
         }
@@ -313,7 +364,7 @@ class ViewController: UIViewController {
     @IBAction func generatePass(_ sender: Any) {
 
         // måste fixas
-        entrant = EntrantSub(entrantType: EntrantType.guest, entrantSubType: EntrantSubType.guestVip, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: nil, dateOfVisit: nil))
+        entrant = EntrantSub(entrantType: EntrantType.guest, entrantSubType: EntrantSubType.guestVip, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: dateOfBirth.text, dateOfVisit: dateOfBirth.text))
     }
     
     

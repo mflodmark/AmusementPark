@@ -44,7 +44,7 @@ class TestingController: UIViewController {
         let firstName = viewController.entrant?.personalInformation.firstName
         let lastName = viewController.entrant?.personalInformation.lastName
         
-        // FIXME: Unwrapping
+        // FIXME: Unwrapping 
         return firstName! + " " + lastName!
     }
     

@@ -17,8 +17,8 @@ struct PersonalInformation {
     let state: String?
     let zipCode: String?
     let vendorCompany: String?
-    let dateOfBirth: Date?
-    let dateOfVisit: Date?
+    let dateOfBirth: String?
+    let dateOfVisit: String?
     
     func validateInformation() throws {
         guard firstName != "" else {
@@ -42,10 +42,10 @@ struct PersonalInformation {
         guard vendorCompany != "" else {
             throw InformationError.vendorCompanyNotProvided
         }
-        guard dateOfBirth != nil else {
+        guard dateOfBirth != "" else {
             throw InformationError.dateOfBirthNotProvided
         }
-        guard dateOfVisit != nil else {
+        guard dateOfVisit != "" else {
             throw InformationError.dateOfVisitNotProvided
         }
     }

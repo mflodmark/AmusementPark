@@ -128,6 +128,9 @@
                                         <state key="normal" title="Season">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="checkEntrantSubType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WiQ-LA-W5g"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
