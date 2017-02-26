@@ -20,35 +20,6 @@ struct PersonalInformation {
     let dateOfBirth: String?
     let dateOfVisit: String?
     
-    func validateInformation() throws {
-        guard firstName != "" else {
-            throw InformationError.firstNameNotProvided
-        }
-        guard lastName != "" else {
-            throw InformationError.lastNameNotProvided
-        }
-        guard streetAddress != "" else  {
-            throw InformationError.streetAddressNotProvided
-        }
-        guard city != "" else {
-            throw InformationError.cityNotProvided
-        }
-        guard state != "" else {
-            throw InformationError.stateNotProvided
-        }
-        guard zipCode != nil else {
-            throw InformationError.cityNotProvided
-        }
-        guard vendorCompany != "" else {
-            throw InformationError.vendorCompanyNotProvided
-        }
-        guard dateOfBirth != "" else {
-            throw InformationError.dateOfBirthNotProvided
-        }
-        guard dateOfVisit != "" else {
-            throw InformationError.dateOfVisitNotProvided
-        }
-    }
-}
+   }
 
 

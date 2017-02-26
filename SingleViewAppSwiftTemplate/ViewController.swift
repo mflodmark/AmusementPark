@@ -58,50 +58,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Functions
     
-    func showDatePicker() {
+    func showAlert(title: String) {
+        let alertController = UIAlertController(title: "\(title)", message: "Provide info to start", preferredStyle: .alert)
         
-        // Datepicker
-        datePicker.frame = CGRect(x: 10, y: 50, width: self.view.frame.width, height: 200)
-        datePicker.timeZone = NSTimeZone.local
-        datePicker.backgroundColor = UIColor.white
-        datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged(_:)), for: .valueChanged)
-        datePicker.datePickerMode = UIDatePickerMode.date
-        self.view.addSubview(datePicker)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(action)
         
-        // Add Button
-        dateButton.frame = CGRect(x: 10, y: 250, width: self.view.frame.width, height: 40)
-        if entrantS == EntrantSubType.guestFreeChild {
-            dateButton.setTitle("Add birth date and then press here", for: .normal)
-        } else {
-            dateButton.setTitle("Add visit date and then press here", for: .normal)
-        }
-        dateButton.backgroundColor = UIColor.black
-        dateButton.addTarget(self, action: #selector(ViewController.doneButton(_:)), for: .touchUpInside)
-        self.view.addSubview(dateButton)
+        present(alertController, animated: true, completion: nil)
     }
     
-    func datePickerValueChanged(_ sender: UIDatePicker){
-        
-        // Create date formatter
-        let dateFormatter: DateFormatter = DateFormatter()
-        
-        // Set date format
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        datePicker.datePickerMode = UIDatePickerMode.date
-        
-        // Apply date
-        if entrantS == EntrantSubType.guestFreeChild {
-            dateOfBirth.text = dateFormatter.string(from: sender.date)
-        } else {
-        }
-        
-    }
-    
-    func doneButton(_ sender: UIButton) {
-        // Resign
-        datePicker.resignFirstResponder()
-        dateButton.resignFirstResponder()
-    }
     
     // Buttons Enabled = False
     func buttonsIsEnabledFalse () {
@@ -217,7 +182,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         setDefaultSettings()
 
-        if type == .guestClassic || type == .guestFreeChild || type == .guestVip {
+        if type == .guestClassic || type == .guestVip {
+            // do nothing
+        }
+        
+        if  type == .guestFreeChild {
             
             dateOfBirth.backgroundColor = UIColor.white
             dateOfBirth.isUserInteractionEnabled = true
@@ -325,15 +294,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if sender == guestButton {
             getTextEntrantSubTypeButtons(type: EntrantType.guest)
+            entrantT = EntrantType.guest
+            print("EntrantT -----> " + (entrantT?.rawValue)!)
             
         } else if sender == managerButton {
             getTextEntrantSubTypeButtons(type: EntrantType.manager)
+            entrantT = EntrantType.manager
+
             
         } else if sender == vendorButton {
             getTextEntrantSubTypeButtons(type: EntrantType.vendor)
+            entrantT = EntrantType.vendor
+
             
         } else if sender == employeeButton {
             getTextEntrantSubTypeButtons(type: EntrantType.employee)
+            entrantT = EntrantType.employee
+
         }
         
     }
@@ -344,18 +321,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let entrantSubTypeArray = [EntrantSubType.guestClassic, EntrantSubType.guestVip, EntrantSubType.guestFreeChild, EntrantSubType.guestSenior, EntrantSubType.guestSeasonPass, .hourlyEmployeeMaintenance, .hourlyEmployeeFoodServices, .hourlyEmployeeRideServices, .vendor, .manager,.contractEmployee]
         
         subButtonPressed(type: sender)
-
+        
         for subType in entrantSubTypeArray {
-            if sender.title(for: .normal) == EntrantSubType.guestFreeChild.rawValue {
-                // check for age with date that have been added
+            if sender.title(for: .normal) == subType.rawValue {
                 
-                showDatePicker()
-                //let date
-                
-                //checkAge(bornAt: date)
-                
-            } else if sender.title(for: .normal) == subType.rawValue {
                 showCorrectFields(type: subType)
+                entrantS = subType
+                print("EntrantS -------> " + (entrantS?.rawValue)!)
             }
         }
     }
@@ -363,8 +335,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // Generate Pass
     @IBAction func generatePass(_ sender: Any) {
 
-        // måste fixas
-        entrant = EntrantSub(entrantType: EntrantType.guest, entrantSubType: EntrantSubType.guestVip, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: dateOfBirth.text, dateOfVisit: dateOfBirth.text))
     }
     
     
@@ -424,8 +394,124 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var zipCode: UITextField!
     
     
-    // MARK: Layout
+    // MARK: Segue
+    
+    func validateInfo() throws {
+        if firstName.isUserInteractionEnabled == true {
+            guard firstName.text != "" else {
+                throw InformationError.firstNameNotProvided
+            }
+        }
+        
+        if lastName.isUserInteractionEnabled == true {
+            guard lastName.text != "" else {
+                throw InformationError.lastNameNotProvided
+            }
+        }
+        
+        if streetAddress.isUserInteractionEnabled == true {
+            guard streetAddress.text != "" else {
+                throw InformationError.streetAddressNotProvided
+            }
+        }
+        
+        if city.isUserInteractionEnabled == true {
+            guard city.text != "" else {
+                throw InformationError.cityNotProvided
+            }
+        }
+        
+        if state.isUserInteractionEnabled == true {
+            guard state.text != "" else {
+                throw InformationError.stateNotProvided
+            }
+        }
+        
+        if zipCode.isUserInteractionEnabled == true {
+            guard zipCode.text != "" else {
+                throw InformationError.zipCodeNotProvided
+            }
+        }
+        
+        if company.isUserInteractionEnabled == true {
+            guard company.text != "" else {
+                throw InformationError.vendorCompanyNotProvided
+            }
+        }
+        
+        if dateOfBirth.isUserInteractionEnabled == true {
+            guard dateOfBirth.text != "" else {
+                throw InformationError.dateOfBirthNotProvided
+            }
+        }
+        
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "date" {
+            if firstButton.title(for: .normal) == EntrantSubType.guestFreeChild.rawValue {
+                //perform segue
+                return true
+            }
+            //cancel segue
+            return false
+        }
+        // by default
+        return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
+        
+        if segue.identifier == "segue" {
+            
+            // catch errors
+            do {
+                try validateInfo()
+            } catch InformationError.firstNameNotProvided {
+                showAlert(title: InformationErrorText.firstNameNotProvided.rawValue )
+                print("Missing first name, please add first name and try again")
+            } catch InformationError.lastNameNotProvided {
+                showAlert(title: InformationErrorText.lastNameNotProvided.rawValue )
+                print("Missing last name, please add last name and try again")
+            } catch InformationError.cityNotProvided {
+                showAlert(title: InformationErrorText.cityNotProvided.rawValue )
+                print("Missing city, please add city and try again")
+            } catch InformationError.stateNotProvided {
+                showAlert(title: InformationErrorText.stateNotProvided.rawValue )
+                print("Missing state, please add state and try again")
+            } catch InformationError.streetAddressNotProvided {
+                showAlert(title: InformationErrorText.streetAddressNotProvided.rawValue )
+                print("Missing street address, please add street address and try again")
+            } catch InformationError.zipCodeNotProvided {
+                showAlert(title: InformationErrorText.zipCodeNotProvided.rawValue )
+                print("Missing zip code, please add zip code and try again")
+            }  catch InformationError.dateOfBirthNotProvided {
+                showAlert(title: InformationErrorText.dateOfBirthNotProvided.rawValue )
+                print("Missing date of birth, please add date of birth and try again")
+            } catch InformationError.dateOfVisitNotProvided {
+                showAlert(title: InformationErrorText.dateOfVisitNotProvided.rawValue )
+                print("Missing date of visit, please add date of visit and try again")
+            } catch InformationError.vendorCompanyNotProvided {
+                showAlert(title: InformationErrorText.vendorCompanyNotProvided.rawValue )
+                print("Missing vendor company, please add vendor company and try again")
+            } catch {
+                fatalError("Fatal error!")
+            }
+            
+            // 
+            
+            
+            entrant = EntrantSub(entrantType: entrantT!, entrantSubType: entrantS!, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: dateOfBirth.text, dateOfVisit: dateOfBirth.text))
+            
+        
+            
+            print("Entrant ------> " + entrant!.entrantType.rawValue)
+            print("Entrant ------> " + entrant!.entrantSubType.rawValue)
+        }
+    }
+
+    
 }
 
 

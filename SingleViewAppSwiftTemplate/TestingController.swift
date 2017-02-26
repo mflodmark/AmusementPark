@@ -11,9 +11,6 @@ import UIKit
 
 class TestingController: UIViewController {
     
-    // count projectnr -- öka när cerate new pass är tryckt
-    //counter += 1
-    
     let viewController = ViewController()
     let swipe = Swipe()
     @IBOutlet weak var image: UIImageView!
@@ -23,15 +20,15 @@ class TestingController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
+        fullName.text = getFullName()
+        pass.text = getEntrantType()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
-        fullName.text = getFullName()
-        pass.text = getEntrantType()
+
         
     }
     
@@ -40,19 +37,25 @@ class TestingController: UIViewController {
     
     // MARK: Functions
     
+
+    
     func getFullName() -> String {
-        let firstName = viewController.entrant?.personalInformation.firstName
-        let lastName = viewController.entrant?.personalInformation.lastName
+
         
-        // FIXME: Unwrapping 
-        return firstName! + " " + lastName!
+        // Unwrapping
+        if let firstName = viewController.entrant?.personalInformation.firstName, let lastName = viewController.entrant?.personalInformation.lastName {
+            print("get full name   " + firstName)
+            return firstName + " " + lastName
+        }
+        
+        return "No name available"
     }
     
     func getEntrantType() -> String {
-        let entrantType = viewController.entrant?.entrantType.rawValue
-        let entrantSubType = viewController.entrant?.entrantSubType.rawValue
-        
-        return entrantSubType! + " " + entrantType! + " Pass"
+        if let entrantSubType = viewController.entrant?.entrantSubType.rawValue {
+            return entrantSubType + " Pass"
+        }
+        return "No pass available"
     }
     
     // MARK: Buttons
@@ -60,36 +63,48 @@ class TestingController: UIViewController {
     // When buttons is pressed, call swipe functions
     
     @IBAction func testAreaAccess(_ sender: Any) {
-        let entrantSubType = viewController.entrant?.entrantSubType
+        if let entrantSubType = viewController.entrantS {
 
-        let amusementArea = swipe.swipeAreaAccess(type: entrantSubType!, areaTryingToAccess: .amusementAreas)
-        let kitchenArea = swipe.swipeAreaAccess(type: entrantSubType!, areaTryingToAccess: .kitchenAreas)
-        let maintenanceArea = swipe.swipeAreaAccess(type: entrantSubType!, areaTryingToAccess: .maintenanceAreas)
-        let rideControlArea = swipe.swipeAreaAccess(type: entrantSubType!, areaTryingToAccess: .rideControlAreas)
+        let amusementArea = swipe.swipeAreaAccess(type: entrantSubType, areaTryingToAccess: .amusementAreas)
+        let kitchenArea = swipe.swipeAreaAccess(type: entrantSubType, areaTryingToAccess: .kitchenAreas)
+        let maintenanceArea = swipe.swipeAreaAccess(type: entrantSubType, areaTryingToAccess: .maintenanceAreas)
+        let rideControlArea = swipe.swipeAreaAccess(type: entrantSubType, areaTryingToAccess: .rideControlAreas)
         
         // Add text to label test result
         testResult.text = "You have access to: AmusementArea: \(amusementArea) KichenArea: \(kitchenArea) MaintenanceArea: \(maintenanceArea) RideControlArea: \(rideControlArea)"
+        }
+        
+        testResult.text = "No info available"
     }
     
     @IBAction func testRideAccess(_ sender: Any) {
-        let entrantSubType = viewController.entrant?.entrantSubType
+        if let entrantSubType = viewController.entrantS {
         
-        let accessAllRides = swipe.swipeRideAccess(type: entrantSubType!, rideAccess: .accessAllRides)
-        let skipAllLines = swipe.swipeRideAccess(type: entrantSubType!, rideAccess: .skipAllRideLines)
+        let accessAllRides = swipe.swipeRideAccess(type: entrantSubType, rideAccess: .accessAllRides)
+        let skipAllLines = swipe.swipeRideAccess(type: entrantSubType, rideAccess: .skipAllRideLines)
 
         
         // Add text to label test result
         testResult.text = "You have access to: all rides: \(accessAllRides) skip all ride lines: \(skipAllLines)"
+        }
+        
+        testResult.text = "No info available"
+
+        
     }
     
     @IBAction func testDiscountAccess(_ sender: Any) {
-        let entrantSubType = viewController.entrant?.entrantSubType
+        if let entrantSubType = viewController.entrantS {
         
-        let food = swipe.swipeDiscountAccess(type: entrantSubType!, discount: .food)
-        let merchandise = swipe.swipeDiscountAccess(type: entrantSubType!, discount: .merchandise)
+        let food = swipe.swipeDiscountAccess(type: entrantSubType, discount: .food)
+        let merchandise = swipe.swipeDiscountAccess(type: entrantSubType, discount: .merchandise)
         
         // Add text to label test result
         testResult.text = "You have the following discount: \nFood: \(food) \nMerchandise: \(merchandise)"
+        }
+
+        testResult.text = "No info available"
+
         
     }
     

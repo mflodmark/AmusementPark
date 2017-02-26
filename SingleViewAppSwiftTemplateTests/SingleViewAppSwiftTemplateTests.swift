@@ -132,6 +132,15 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
         let access = swipe.swipeAreaAccess(type: employeeHourlyEmployeeRideServices, areaTryingToAccess: .rideControlAreas)
         XCTAssertTrue(access == true)
     }
+    
+    /*
+    func testEntrantTGotValue() {
+        let viewController = ViewController()
+        
+        let value = viewController.entrantT
+
+        XCTAssertTrue(value != nil)
+    }*/
 
     
     

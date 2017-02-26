@@ -12,6 +12,7 @@
 		28263BE91E517EDF00BAD89E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28263BE81E517EDF00BAD89E /* Errors.swift */; };
 		28BA357E1E5B720C008844BA /* EntrantSub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA357D1E5B720C008844BA /* EntrantSub.swift */; };
 		28BA35821E5CA4A4008844BA /* TestingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA35811E5CA4A4008844BA /* TestingController.swift */; };
+		28BA35861E62C0B0008844BA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BA35851E62C0AF008844BA /* DateViewController.swift */; };
 		28C0D1F91E5A06B30027C2AE /* PersonalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0D1F81E5A06B30027C2AE /* PersonalInfo.swift */; };
 		28C0D1FB1E5A07320027C2AE /* BirthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0D1FA1E5A07320027C2AE /* BirthInfo.swift */; };
 		28C0D1FD1E5A0AD20027C2AE /* VendorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0D1FC1E5A0AD10027C2AE /* VendorInfo.swift */; };
@@ -47,6 +48,7 @@
 		28263BE81E517EDF00BAD89E /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		28BA357D1E5B720C008844BA /* EntrantSub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantSub.swift; sourceTree = "<group>"; };
 		28BA35811E5CA4A4008844BA /* TestingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingController.swift; sourceTree = "<group>"; };
+		28BA35851E62C0AF008844BA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		28C0D1F81E5A06B30027C2AE /* PersonalInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInfo.swift; sourceTree = "<group>"; };
 		28C0D1FA1E5A07320027C2AE /* BirthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthInfo.swift; sourceTree = "<group>"; };
 		28C0D1FC1E5A0AD10027C2AE /* VendorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorInfo.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				3A8AADCC1DF9B85E00A2B931 /* Main.storyboard */,
 				3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */,
 				28BA35811E5CA4A4008844BA /* TestingController.swift */,
+				28BA35851E62C0AF008844BA /* DateViewController.swift */,
 				3A8AADCF1DF9B85E00A2B931 /* Assets.xcassets */,
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
@@ -293,6 +296,7 @@
 				28C0D1FB1E5A07320027C2AE /* BirthInfo.swift in Sources */,
 				28BA35821E5CA4A4008844BA /* TestingController.swift in Sources */,
 				28263BE91E517EDF00BAD89E /* Errors.swift in Sources */,
+				28BA35861E62C0B0008844BA /* DateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

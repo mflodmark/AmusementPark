@@ -16,36 +16,13 @@ class EntrantSub {
     let entrantType: EntrantType
     var entrantSubType: EntrantSubType
     let personalInformation: PersonalInformation
+    let viewController = ViewController()
     
     init(entrantType: EntrantType, entrantSubType: EntrantSubType, personalInformation: PersonalInformation) {
         self.entrantType = entrantType
         self.entrantSubType = entrantSubType
         self.personalInformation = personalInformation
         
-        // catch errors
-        do {
-            try personalInformation.validateInformation()
-        } catch InformationError.firstNameNotProvided {
-            print("Missing first name, please add first name and try again")
-        } catch InformationError.lastNameNotProvided {
-            print("Missing last name, please add last name and try again")
-        } catch InformationError.cityNotProvided {
-            print("Missing city, please add city and try again")
-        } catch InformationError.stateNotProvided {
-            print("Missing state, please add state and try again")
-        } catch InformationError.streetAddressNotProvided {
-            print("Missing street address, please add street address and try again")
-        } catch InformationError.zipCodeNotProvided {
-            print("Missing zip code, please add zip code and try again")
-        }  catch InformationError.dateOfBirthNotProvided {
-            print("Missing date of birth, please add date of birth and try again")
-        } catch InformationError.dateOfVisitNotProvided {
-            print("Missing date of visit, please add date of visit and try again")
-        } catch InformationError.vendorCompanyNotProvided {
-            print("Missing vendor company, please add vendor company and try again")
-        } catch {
-            fatalError("Fatal error!")
-        }
     }
     
 }
