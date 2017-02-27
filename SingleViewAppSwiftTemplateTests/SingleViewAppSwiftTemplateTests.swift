@@ -142,6 +142,12 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
         XCTAssertTrue(value != nil)
     }*/
 
+    /*
+    func testCheckAge() {
+        let dateView = DateViewController()
+        let check = dateView.
+    }
+*/
     
     
     func testExample() {

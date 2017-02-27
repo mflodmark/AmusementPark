@@ -11,8 +11,11 @@ import UIKit
 
 class TestingController: UIViewController {
     
+    // MARK: Declarations
+
     let viewController = ViewController()
     let swipe = Swipe()
+
     @IBOutlet weak var image: UIImageView!
     
 
@@ -32,7 +35,6 @@ class TestingController: UIViewController {
         
     }
     
-    // MARK: Declarations
     
     
     // MARK: Functions
@@ -43,7 +45,7 @@ class TestingController: UIViewController {
 
         
         // Unwrapping
-        if let firstName = viewController.entrant?.personalInformation.firstName, let lastName = viewController.entrant?.personalInformation.lastName {
+        if let firstName = entrant?.personalInformation.firstName, let lastName = entrant?.personalInformation.lastName {
             print("get full name   " + firstName)
             return firstName + " " + lastName
         }
@@ -52,7 +54,7 @@ class TestingController: UIViewController {
     }
     
     func getEntrantType() -> String {
-        if let entrantSubType = viewController.entrant?.entrantSubType.rawValue {
+        if let entrantSubType = entrant?.entrantSubType.rawValue {
             return entrantSubType + " Pass"
         }
         return "No pass available"
@@ -63,7 +65,7 @@ class TestingController: UIViewController {
     // When buttons is pressed, call swipe functions
     
     @IBAction func testAreaAccess(_ sender: Any) {
-        if let entrantSubType = viewController.entrantS {
+        if let entrantSubType = entrant?.entrantSubType {
 
         let amusementArea = swipe.swipeAreaAccess(type: entrantSubType, areaTryingToAccess: .amusementAreas)
         let kitchenArea = swipe.swipeAreaAccess(type: entrantSubType, areaTryingToAccess: .kitchenAreas)
@@ -78,7 +80,7 @@ class TestingController: UIViewController {
     }
     
     @IBAction func testRideAccess(_ sender: Any) {
-        if let entrantSubType = viewController.entrantS {
+        if let entrantSubType = entrant?.entrantSubType {
         
         let accessAllRides = swipe.swipeRideAccess(type: entrantSubType, rideAccess: .accessAllRides)
         let skipAllLines = swipe.swipeRideAccess(type: entrantSubType, rideAccess: .skipAllRideLines)
@@ -94,7 +96,7 @@ class TestingController: UIViewController {
     }
     
     @IBAction func testDiscountAccess(_ sender: Any) {
-        if let entrantSubType = viewController.entrantS {
+        if let entrantSubType = entrant?.entrantSubType {
         
         let food = swipe.swipeDiscountAccess(type: entrantSubType, discount: .food)
         let merchandise = swipe.swipeDiscountAccess(type: entrantSubType, discount: .merchandise)
@@ -110,9 +112,7 @@ class TestingController: UIViewController {
     
 
     @IBAction func createNewPass(_ sender: UIButton) {
-        
-        // Update project nr
-        viewController.counter += 1
+
     }
     
     

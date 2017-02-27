@@ -27,7 +27,7 @@ class Swipe {
         
         // Check if false and return access denied with alert message
         if area == false {
-            viewController.alertAreaAccess()
+            //viewController.alertAreaAccess()
             return area
         } else {
             return area
@@ -42,6 +42,10 @@ class Swipe {
             case .skipAllRideLines: return type.skipAllRideLines
             }
         }
+        
+        return ride
+        
+        /*
         // Check if false and return access denied with alert message
         if ride == false {
             if rideAccess == .accessAllRides {
@@ -52,7 +56,7 @@ class Swipe {
             return ride
         } else {
             return ride
-        }
+        }*/
     }
     
     

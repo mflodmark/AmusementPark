@@ -8,13 +8,16 @@
 
 import UIKit
 
+// Global Variable
+var entrant: EntrantSub? = nil
+var entrantT: EntrantType? = nil
+var entrantS: EntrantSubType? = nil
+
+
 class ViewController: UIViewController, UITextFieldDelegate {
     
     // Declarations
     var counter = 1
-    var entrant: EntrantSub? = nil
-    var entrantT: EntrantType? = nil
-    var entrantS: EntrantSubType? = nil
     // Create a DatePicker
     let datePicker: UIDatePicker = UIDatePicker()
     let dateButton = UIButton()
@@ -37,6 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    /*
     // MARK: Alerts
     func alertAreaAccess() {
         let alert = UIAlertController(title: "Area access", message: "Not allowed", preferredStyle: .alert)
@@ -54,7 +58,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let alert = UIAlertController(title: "Skip all lines", message: "Not allowed", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
+    }*/
     
     // MARK: Functions
     
@@ -243,23 +247,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // Check age for guest type free child
-    func checkAge(bornAt: Date) {
-        let age = Date().timeIntervalSince(bornAt)
-        let ageLimit = 5.00
-        let ageLimitInDays = ageLimit * 365
-        
-        if age <= ageLimitInDays {
-            entrantS = EntrantSubType.guestFreeChild
-            subButtonPressed(type: firstButton)
-        } else {
-            entrantS = EntrantSubType.guestClassic
-            subButtonPressed(type: secondButton)
-        }
-        
-        showCorrectFields(type: entrantS!)
 
-    }
     
     
     // MARK: Buttons
@@ -402,7 +390,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 throw InformationError.firstNameNotProvided
             }
         }
-        
         if lastName.isUserInteractionEnabled == true {
             guard lastName.text != "" else {
                 throw InformationError.lastNameNotProvided
@@ -444,7 +431,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 throw InformationError.dateOfBirthNotProvided
             }
         }
-        
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -456,13 +442,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             //cancel segue
             return false
         }
+        
+        if identifier == "segue" {
+            counter += 1
+        }
+
         // by default
-        return false
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        
         if segue.identifier == "segue" {
             
             // catch errors
@@ -498,8 +487,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } catch {
                 fatalError("Fatal error!")
             }
-            
-            // 
+
+            //
             
             
             entrant = EntrantSub(entrantType: entrantT!, entrantSubType: entrantS!, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: dateOfBirth.text, dateOfVisit: dateOfBirth.text))
@@ -510,10 +499,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("Entrant ------> " + entrant!.entrantSubType.rawValue)
         }
     }
-
-    
 }
-
-
-
 

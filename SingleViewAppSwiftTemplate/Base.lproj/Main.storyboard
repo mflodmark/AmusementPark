@@ -461,7 +461,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XGL-sk-9Kk">
-                                <rect key="frame" x="0.0" y="497" width="1024" height="216"/>
+                                <rect key="frame" x="352" y="246" width="320" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="509740159.07058603">
                                     <!--2017-02-25 18:29:19 +0000-->
                                 </date>
@@ -470,7 +470,7 @@
                                 </date>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSb-1q-QnD">
-                                <rect key="frame" x="20" y="309" width="984" height="48"/>
+                                <rect key="frame" x="20" y="659" width="984" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -478,15 +478,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="TSb-1q-QnD" secondAttribute="trailing" id="2TQ-Gy-UDt"/>
-                            <constraint firstItem="TSb-1q-QnD" firstAttribute="leading" secondItem="SLU-SS-Mz8" secondAttribute="leadingMargin" id="2gR-Vn-xcI"/>
-                            <constraint firstAttribute="trailing" secondItem="XGL-sk-9Kk" secondAttribute="trailing" id="EyF-5K-EAj"/>
-                            <constraint firstItem="aFd-Wh-pM6" firstAttribute="top" secondItem="aCT-oT-Kai" secondAttribute="bottom" priority="750" constant="506" id="S1t-2Z-Epi"/>
-                            <constraint firstItem="XGL-sk-9Kk" firstAttribute="leading" secondItem="SLU-SS-Mz8" secondAttribute="leading" id="Xp9-10-AA2"/>
-                            <constraint firstItem="aCT-oT-Kai" firstAttribute="top" secondItem="XGL-sk-9Kk" secondAttribute="bottom" constant="87" id="dhZ-KE-6bw"/>
-                            <constraint firstItem="XGL-sk-9Kk" firstAttribute="top" secondItem="TSb-1q-QnD" secondAttribute="bottom" constant="140" id="ln5-lg-6bo"/>
-                            <constraint firstItem="aCT-oT-Kai" firstAttribute="centerX" secondItem="XGL-sk-9Kk" secondAttribute="centerX" id="owv-af-Ih5"/>
-                            <constraint firstItem="TSb-1q-QnD" firstAttribute="top" secondItem="BHj-1z-eHb" secondAttribute="bottom" constant="289" id="uyF-h8-zH8"/>
+                            <constraint firstItem="aCT-oT-Kai" firstAttribute="centerX" secondItem="XGL-sk-9Kk" secondAttribute="centerX" id="5oh-pu-1MC"/>
+                            <constraint firstItem="aFd-Wh-pM6" firstAttribute="top" secondItem="aCT-oT-Kai" secondAttribute="bottom" constant="506" id="6RN-DA-xWL"/>
+                            <constraint firstItem="TSb-1q-QnD" firstAttribute="top" secondItem="XGL-sk-9Kk" secondAttribute="bottom" constant="197" id="FdO-Az-7uc"/>
+                            <constraint firstItem="XGL-sk-9Kk" firstAttribute="top" secondItem="BHj-1z-eHb" secondAttribute="bottom" constant="226" id="K1b-KP-YP6"/>
+                            <constraint firstItem="aCT-oT-Kai" firstAttribute="centerX" secondItem="TSb-1q-QnD" secondAttribute="centerX" id="crE-5G-ziR"/>
+                            <constraint firstItem="TSb-1q-QnD" firstAttribute="leading" secondItem="SLU-SS-Mz8" secondAttribute="leadingMargin" id="lF9-Ha-1ZQ"/>
+                            <constraint firstItem="aCT-oT-Kai" firstAttribute="centerX" secondItem="SLU-SS-Mz8" secondAttribute="centerX" id="mdH-oH-YCd"/>
+                            <constraint firstItem="aCT-oT-Kai" firstAttribute="top" secondItem="TSb-1q-QnD" secondAttribute="bottom" constant="93" id="uyq-In-Tpf"/>
                         </constraints>
                     </view>
                     <connections>
