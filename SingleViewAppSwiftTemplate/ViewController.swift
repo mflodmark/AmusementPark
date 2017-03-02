@@ -8,19 +8,19 @@
 
 import UIKit
 
-// Global Variable
+// Global Variables
 var entrant: EntrantSub? = nil
 var entrantT: EntrantType? = nil
 var entrantS: EntrantSubType? = nil
-
+var counter = 1
+var textToBirthDate: String? = ""
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
     // Declarations
-    var counter = 1
     // Create a DatePicker
-    let datePicker: UIDatePicker = UIDatePicker()
-    let dateButton = UIButton()
+    var datePicker: UIDatePicker = UIDatePicker()
+    var doneButton = UIButton()
 
     
     override func viewDidLoad() {
@@ -33,6 +33,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // default for name on sub type
         subButtonsIsBlank()
         
+        //addStringToBirth(text: textToBirthDate!)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,27 +42,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-    // MARK: Alerts
-    func alertAreaAccess() {
-        let alert = UIAlertController(title: "Area access", message: "Not allowed", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func alertRideAccess() {
-        let alert = UIAlertController(title: "Ride access", message: "Not allowed", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func alertRideAccessSkipAllLines() {
-        let alert = UIAlertController(title: "Skip all lines", message: "Not allowed", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }*/
     
     // MARK: Functions
+    
+    func addStringToBirth(text: String) {
+        print("dateOfBirth-----> \(text)")
+        dateOfBirth.text = text
+        print("dateOfBirth-----> \(dateOfBirth.text)")
+
+    }
     
     func showAlert(title: String) {
         let alertController = UIAlertController(title: "\(title)", message: "Provide info to start", preferredStyle: .alert)
@@ -381,6 +371,93 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var zipCode: UITextField!
     
+    // MARK: Datepicker
+    var dateFromDatePicker: Date? = nil
+    var stringFromDatePicker: String? = ""
+
+
+
+        
+    @IBAction func dateOfBirthButton(_ sender: UITextField) {
+        
+        //Create the view
+        let inputView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
+        
+        // Datepicker
+        datePicker = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 0, height: 0))
+        datePicker.datePickerMode = UIDatePickerMode.date
+        inputView.addSubview(datePicker)
+        
+        datePicker.addTarget(self, action: #selector(DateViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        
+        // Button
+        let doneButton = UIButton(frame: CGRect(x: 30, y: 0, width: 600, height: 50))
+        doneButton.setTitle("Donebutton will only work for child if age <= 5 years", for: UIControlState.normal)
+        doneButton.setTitle("Donebutton will only work for child if age <= 5 years", for: UIControlState.highlighted)
+        doneButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        doneButton.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        
+        inputView.addSubview(doneButton) // add Button to UIView
+        
+        doneButton.addTarget(self, action: #selector(doneButton(sender:)), for: UIControlEvents.touchUpInside) // set button click event
+        
+        sender.inputView = inputView
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: UIControlEvents.valueChanged)
+        
+        //datePickerValueChanged(datePicker)
+        
+    }
+
+    
+    func doneButton(sender:UIButton) {
+        if entrantS == EntrantSubType.guestFreeChild {
+            if let date = dateFromDatePicker {
+                if checkAge(bornAt: date) == true {
+                    if let dateString = stringFromDatePicker {
+                        textToBirthDate = dateString
+                        dateOfBirth.resignFirstResponder() // To resign the inputView on clicking done.
+                        print("text --------> \(textToBirthDate!)")
+                    }
+                }
+            }
+         } else {
+            dateOfBirth.resignFirstResponder()
+         }
+        
+    }
+    
+    
+    func datePickerValueChanged(_ sender: UIDatePicker){
+        
+        // Create date formatter
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        // Set date format
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFromDatePicker = datePicker.date
+        
+        print("Date -------> " + dateFormatter.string(from: sender.date))
+        
+        dateOfBirth.text = dateFormatter.string(from: sender.date)
+        stringFromDatePicker = dateFormatter.string(from: sender.date)
+        
+    }
+    
+    // Check age for guest type free child
+    func checkAge(bornAt: Date) -> Bool {
+        let age = Date().timeIntervalSince(bornAt)
+        let ageLimit = 5.00
+        let ageLimitInSeconds = ageLimit * 365 * 24 * 60 * 60
+        
+        print("Age------------->" + "\(age)")
+        print(ageLimitInSeconds)
+        
+        if age <= ageLimitInSeconds {
+            return true
+        }
+        return false
+    }
+    
     
     // MARK: Segue
     
@@ -444,7 +521,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         if identifier == "segue" {
-            counter += 1
+            //counter += 1
         }
 
         // by default
@@ -487,8 +564,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } catch {
                 fatalError("Fatal error!")
             }
-
-            //
             
             
             entrant = EntrantSub(entrantType: entrantT!, entrantSubType: entrantS!, personalInformation: PersonalInformation(firstName: firstName.text, lastName: lastName.text, streetAddress: streetAddress.text, city: city.text, state: state.text, zipCode: zipCode.text, vendorCompany: company.text, dateOfBirth: dateOfBirth.text, dateOfVisit: dateOfBirth.text))
@@ -499,5 +574,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("Entrant ------> " + entrant!.entrantSubType.rawValue)
         }
     }
+    
+    
 }
 

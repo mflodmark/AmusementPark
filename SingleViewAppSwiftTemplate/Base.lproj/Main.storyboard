@@ -86,7 +86,6 @@
                                         </state>
                                         <connections>
                                             <action selector="checkEntrantSubType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zIK-Hr-fsY"/>
-                                            <segue destination="agv-Gc-gz6" kind="presentation" identifier="date" id="XOE-cD-1sz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1W-Dg-MYt">
@@ -164,6 +163,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="dateOfBirthButton:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="4bV-e0-DXE"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -457,11 +459,15 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="button:" destination="agv-Gc-gz6" eventType="touchUpInside" id="GWn-JZ-wEb"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="back" id="U74-vk-iLY"/>
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XGL-sk-9Kk">
                                 <rect key="frame" x="352" y="246" width="320" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="IOU-kU-Chp"/>
+                                    <constraint firstAttribute="height" constant="216" id="jhi-Lo-wno"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="509740159.07058603">
                                     <!--2017-02-25 18:29:19 +0000-->
                                 </date>
@@ -471,6 +477,10 @@
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSb-1q-QnD">
                                 <rect key="frame" x="20" y="659" width="984" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="B00-zH-Irx"/>
+                                    <constraint firstAttribute="width" constant="984" id="LMY-4L-NqY"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -688,6 +698,6 @@
         <image name="FaceImageAsset" width="204" height="198"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LMb-l3-1pB"/>
+        <segue reference="U74-vk-iLY"/>
     </inferredMetricsTieBreakers>
 </document>

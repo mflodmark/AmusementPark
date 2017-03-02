@@ -16,6 +16,7 @@ class DateViewController: UIViewController {
     
     let viewController = ViewController()
     var dateFromDatePicker: Date? = nil
+    var stringFromDatePicker: String? = ""
     
     
     override func viewDidLoad() {
@@ -44,11 +45,11 @@ class DateViewController: UIViewController {
     
      func showDatePicker() {
      
-     // Datepicker
-     //datePicker.timeZone = NSTimeZone.local
-     datePicker.addTarget(self, action: #selector(DateViewController.datePickerValueChanged(_:)), for: .valueChanged)
-     //datePicker.datePickerMode = UIDatePickerMode.date
-     self.view.addSubview(datePicker)
+        // Datepicker
+        datePicker.addTarget(self, action: #selector(DateViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        datePicker.datePickerMode = UIDatePickerMode.date
+        self.view.addSubview(datePicker)
+    
      
     }
     
@@ -61,11 +62,10 @@ class DateViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFromDatePicker = datePicker.date
         
-        // Apply date
-        if entrantS == EntrantSubType.guestFreeChild {
-            viewController.dateOfBirth.text = dateFormatter.string(from: sender.date)
-        } else {
-        }
+        print("Date -------> " + dateFormatter.string(from: sender.date))
+        
+        stringFromDatePicker = dateFormatter.string(from: sender.date)
+
         
     }
     
@@ -73,34 +73,48 @@ class DateViewController: UIViewController {
     func checkAge(bornAt: Date) -> Bool {
         let age = Date().timeIntervalSince(bornAt)
         let ageLimit = 5.00
-        let ageLimitInDays = ageLimit * 365
+        let ageLimitInSeconds = ageLimit * 365 * 24 * 60 * 60
         
-        if age <= ageLimitInDays {
-            //entrantS = EntrantSubType.guestFreeChild
-            //subButtonPressed(type: firstButton)
+        print("Age------------->" + "\(age)")
+        print(ageLimitInSeconds)
+        
+        if age <= ageLimitInSeconds {
             return true
-        } else {
-            //entrantS = EntrantSubType.guestClassic
-            //subButtonPressed(type: secondButton)
-            return false
         }
-        
-        //showCorrectFields(type: entrantS!)
-        
-        
+        return false
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "back" {
+            if let date = dateFromDatePicker {
+                if checkAge(bornAt: date) == true {
+                    if let date = stringFromDatePicker {
+                        textToBirthDate = date
+                        print("text --------> \(textToBirthDate!)")
+                        dismiss(animated: true, completion: nil)
+                        return true
+                    }
+                } else {
+                    label.text = "Age must be 5 years or lower"
+                    return false
+                }
+            }
+        }
+        // by default
+        return true
+    }
     
-    @IBAction func button(_ sender: Any) {
-        
-        if checkAge(bornAt: dateFromDatePicker!) == true {
-            
-            label.text = "Age for a child pass must be 5 years or lower"
-        } else {
-            dismiss(animated: true, completion: nil)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "back" {
+            if let text = textToBirthDate {
+                //viewController.dateOfBirth.text = "markus"
+            }
         }
     }
+
     
     
     
 }
+    
+    
